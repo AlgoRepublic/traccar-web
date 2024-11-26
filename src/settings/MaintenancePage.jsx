@@ -10,6 +10,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Box,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { prefixString } from '../common/util/stringUtils';
@@ -119,6 +120,7 @@ const MaintenancePage = () => {
   const validate = () => item && item.name && item.type && item.start && item.period;
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <EditItemView
       endpoint="maintenance"
       item={item}
@@ -137,9 +139,18 @@ const MaintenancePage = () => {
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
               <TextField
+              sx={{
+                backgroundColor: "white",
+
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: 'white', 
+              },
+            
+            }}
                 value={item.name || ''}
                 onChange={(e) => setItem({ ...item, name: e.target.value })}
                 label={t('sharedName')}
+                
               />
               <FormControl>
                 <InputLabel>{t('sharedType')}</InputLabel>
@@ -147,6 +158,13 @@ const MaintenancePage = () => {
                   label={t('sharedType')}
                   value={item.type || ''}
                   onChange={(e) => setItem({ ...item, type: e.target.value, start: 0, period: 0 })}
+                  sx={{
+                    backgroundColor: "white",
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'white', 
+                  },
+                
+                }}
                 >
                   {convertToList(positionAttributes).map(({ key, name }) => (
                     <MenuItem key={key} value={key}>{name}</MenuItem>
@@ -158,12 +176,28 @@ const MaintenancePage = () => {
                 value={rawToValue(true, item.start) || ''}
                 onChange={(e) => setItem({ ...item, start: valueToRaw(true, e.target.value) })}
                 label={labels.start ? `${t('maintenanceStart')} (${labels.start})` : t('maintenanceStart')}
+                sx={{
+                  backgroundColor: "white",
+                  
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'white', 
+                },
+              
+              }}
               />
               <TextField
                 type="number"
                 value={rawToValue(false, item.period) || ''}
                 onChange={(e) => setItem({ ...item, period: valueToRaw(false, e.target.value) })}
                 label={labels.period ? `${t('maintenancePeriod')} (${labels.period})` : t('maintenancePeriod')}
+                sx={{
+                  backgroundColor: "white",
+                
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'white', 
+                },
+              
+              }}
               />
             </AccordionDetails>
           </Accordion>
@@ -175,6 +209,7 @@ const MaintenancePage = () => {
         </>
       )}
     </EditItemView>
+    </Box>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   Checkbox,
   FormGroup,
   Button,
+  Box,
   TextField,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -47,6 +48,7 @@ const NotificationPage = () => {
   const validate = () => item && item.type && item.notificators && (!item.notificators?.includes('command') || item.commandId);
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <EditItemView
       endpoint="notifications"
       item={item}
@@ -80,6 +82,7 @@ const NotificationPage = () => {
                   data={alarms}
                   keyGetter={(it) => it.key}
                   label={t('sharedAlarms')}
+                  
                 />
               )}
               <SelectField
@@ -132,6 +135,12 @@ const NotificationPage = () => {
                 value={item.description || ''}
                 onChange={(e) => setItem({ ...item, description: e.target.value })}
                 label={t('sharedDescription')}
+                sx={{
+                  background:"#fff",
+                  "& .MuiOutlinedInput-root": {
+                    backgroundColor: "#fff",
+                  },
+                }}
               />
               <SelectField
                 value={item.calendarId}
@@ -144,6 +153,7 @@ const NotificationPage = () => {
         </>
       )}
     </EditItemView>
+    </Box>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import {
-  Accordion, AccordionSummary, AccordionDetails, Typography,
+  Accordion, AccordionSummary, AccordionDetails, Typography, Box
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditItemView from './components/EditItemView';
@@ -19,6 +19,7 @@ const DriverPage = () => {
   const validate = () => item && item.name && item.uniqueId;
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <EditItemView
       endpoint="drivers"
       item={item}
@@ -40,11 +41,27 @@ const DriverPage = () => {
                 value={item.name || ''}
                 onChange={(event) => setItem({ ...item, name: event.target.value })}
                 label={t('sharedName')}
+                sx={{
+                  backgroundColor: "white",
+                  borderRadius: "8px",
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'white', 
+                },
+              
+              }}
               />
               <TextField
                 value={item.uniqueId || ''}
                 onChange={(event) => setItem({ ...item, uniqueId: event.target.value })}
                 label={t('deviceIdentifier')}
+                sx={{
+                  backgroundColor: "white",
+                  borderRadius: "8px",
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'white', 
+                },
+              
+              }}
               />
             </AccordionDetails>
           </Accordion>
@@ -56,6 +73,7 @@ const DriverPage = () => {
         </>
       )}
     </EditItemView>
+    </Box>
   );
 };
 

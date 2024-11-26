@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 
 import {
-  Accordion, AccordionSummary, AccordionDetails, Typography,
+  Accordion, AccordionSummary, AccordionDetails, Typography, Box
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditItemView from './components/EditItemView';
@@ -39,6 +39,7 @@ const GroupPage = () => {
   const validate = () => item && item.name;
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <EditItemView
       endpoint="groups"
       item={item}
@@ -61,6 +62,13 @@ const GroupPage = () => {
                 value={item.name || ''}
                 onChange={(event) => setItem({ ...item, name: event.target.value })}
                 label={t('sharedName')}
+                sx={{
+                  backgroundColor: "white",
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'white', 
+                },
+              
+              }}
               />
             </AccordionDetails>
           </Accordion>
@@ -76,6 +84,13 @@ const GroupPage = () => {
                 onChange={(event) => setItem({ ...item, groupId: Number(event.target.value) })}
                 endpoint="/api/groups"
                 label={t('groupParent')}
+                sx={{
+                  backgroundColor: "white",
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: 'white', 
+                },
+              
+              }}
               />
             </AccordionDetails>
           </Accordion>
@@ -87,6 +102,7 @@ const GroupPage = () => {
         </>
       )}
     </EditItemView>
+    </Box>
   );
 };
 
