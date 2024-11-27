@@ -8,8 +8,35 @@ export default (server, darkMode, direction) => useMemo(() => createTheme({
   typography: {
     fontFamily: 'Roboto,Segoe UI,Helvetica Neue,Arial,sans-serif',
   },
+
   palette: palette(server, darkMode),
   direction,
   dimensions,
   components,
+
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#ffffff', 
+          borderRadius: '4px', 
+        },
+        input: {
+          padding: '12px 14px', 
+        },
+        notchedOutline: {
+          borderRadius: '4px', 
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        outlined: {
+          backgroundColor: '#ffffff', 
+          padding: '12px 14px', 
+        },
+      },
+    },
+  },
+  
 }), [server, darkMode, direction]);

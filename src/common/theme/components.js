@@ -10,6 +10,13 @@ export default {
         backgroundColor: theme.palette.background.default,
       }),
     },
+    MuiSelect: {
+      styleOverrides: {
+        outlined: {
+          backgroundColor: '#ffffff',
+        },
+      },
+    },
   },
   MuiButton: {
     styleOverrides: {

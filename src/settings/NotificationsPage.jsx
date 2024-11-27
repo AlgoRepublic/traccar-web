@@ -148,7 +148,6 @@ const NotificationsPage = () => {
   );
 
   const handleNavigate=()=>{
-    console.log("sadsadasdasdasdasdasdasdas")
     navigate('/settings/notification')
       }
 

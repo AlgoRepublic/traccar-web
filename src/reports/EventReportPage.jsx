@@ -209,7 +209,7 @@ const EventReportPage = () => {
                 <FormControl fullWidth>
                   <InputLabel>{t("reportEventTypes")}</InputLabel>
                   <Select
-                    sx={{ backgroundColor: "#303234", borderRadius: "100px" }}
+                  sx={{ backgroundColor:"#303234", borderRadius: "100px" }}
                     label={t("reportEventTypes")}
                     value={eventTypes}
                     onChange={(event, child) => {

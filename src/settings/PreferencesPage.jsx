@@ -104,6 +104,8 @@ const PreferencesPage = () => {
                   {t('mapTitle')}
                 </Typography>
               </AccordionSummary>
+
+
               <AccordionDetails className={classes.details}>
                 <FormControl>
                   <InputLabel>{t('mapActive')}</InputLabel>
@@ -238,6 +240,8 @@ const PreferencesPage = () => {
                 </FormGroup>
               </AccordionDetails>
             </Accordion>
+
+
             <Accordion>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="subtitle1">
@@ -261,6 +265,8 @@ const PreferencesPage = () => {
                 />
               </AccordionDetails>
             </Accordion>
+
+
             <Accordion>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="subtitle1">
@@ -289,6 +295,9 @@ const PreferencesPage = () => {
             </Accordion>
           </>
         )}
+
+
+         
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant="subtitle1">

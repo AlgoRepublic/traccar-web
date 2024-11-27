@@ -2,7 +2,6 @@ import React, { Fragment, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-
   IconButton, Table, TableBody, TableCell, TableHead, TableRow,
 } from '@mui/material';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
@@ -164,7 +163,7 @@ const RouteReportPage = () => {
           </div>
           <Table
             sx={{
-              backgroundColor: "#26282a",
+              // backgroundColor: "#26282a",
               border: "2px solid transparent",
             }}
           >

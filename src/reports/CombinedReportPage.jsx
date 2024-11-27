@@ -97,13 +97,8 @@ const CombinedReportPage = () => {
               includeGroups
               loading={loading}
             />
-          </div>
-          <Table
-            sx={{
-              backgroundColor: "#26282a",
-              border: "2px solid transparent",
-            }}
-          >
+        </div>
+      <Table>
             <TableHead>
               <TableRow>
                 <TableCell>{t("sharedDevice")}</TableCell>
