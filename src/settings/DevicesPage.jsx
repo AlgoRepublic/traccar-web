@@ -162,6 +162,7 @@ import {
   IconButton,
   Tooltip,
   TextField,
+  Menu,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -459,6 +460,22 @@ navigate('/settings/device')
                           </TableCell>
                         )}
                         <TableCell>
+                        {/* <Menu
+              id="action-menu"
+              anchorEl={menuState.anchorEl}
+              open={menuState.id === item.id}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={() => navigate(`/settings/device/${item.id}/edit`)}>
+                <EditIcon sx={{ marginRight: "8px" }} /> Edit
+              </MenuItem>
+              <MenuItem onClick={() => handleDelete(item.id)}>
+                <DeleteIcon sx={{ marginRight: "8px", color: "red" }} /> Delete
+              </MenuItem>
+              <MenuItem onClick={() => navigate(`/settings/device/${item.id}/connections`)}>
+                <LinkIcon sx={{ marginRight: "8px" }} /> Connections
+              </MenuItem>
+            </Menu> */}
                           <CollectionActions
                             itemId={item.id}
                             editPath="/settings/device"

@@ -11,6 +11,7 @@ import {
   TableRow,
   TableBody,
   TableCell,
+  Box,
 } from "@mui/material";
 import {
   formatDistance,
@@ -137,10 +138,12 @@ const SummaryReportPage = () => {
   };
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout
       menu={<ReportsMenu />}
       breadcrumbs={["reportTitle", "reportSummary"]}
     >
+      <div className={classes.containerMain}>
       <div className={classes.header}>
         <ReportFilter
           handleSubmit={handleSubmit}
@@ -194,7 +197,9 @@ const SummaryReportPage = () => {
           )}
         </TableBody>
       </Table>
+      </div>
     </PageLayout>
+    </Box>
   );
 };
 

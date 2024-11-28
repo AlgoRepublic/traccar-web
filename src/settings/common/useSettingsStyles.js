@@ -30,4 +30,11 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  selectField: {
+    background:"#fff",
+    padding:"30px",
+    '& .MuiOutlinedInput-root': {
+      backgroundColor: '#fff',
+    },
+  },
 }));

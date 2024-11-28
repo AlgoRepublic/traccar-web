@@ -236,9 +236,13 @@ const ReportFilter = ({
             disabled={disabled}
             onClick={() => handleClick("json")}
             sx={{
-              backgroundColor: "#5c5c5c",
-              color: "#fff",
-              borderRadius: "100px",
+              // backgroundColor: "#5c5c5c",
+              // color: "#fff",
+              // borderRadius: "100px",
+              height:"100%",
+              backgroundColor: "rgb(133, 37, 8) !important",
+              color: "#fff !important",
+              borderRadius: "4px",
               border: "1px solid #909090",
               boxShadow: "3px 5px 5px 0 rgba(0, 0, 0, 15%)",
             }}

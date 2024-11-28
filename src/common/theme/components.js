@@ -4,6 +4,13 @@ export default {
       noSsr: true,
     },
   },
+  MuiSelect: {
+    styleOverrides: {
+      outlined: {
+        backgroundColor: '#fff',
+      },
+    },
+  },
   MuiOutlinedInput: {
     styleOverrides: {
       root: ({ theme }) => ({

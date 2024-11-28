@@ -6,6 +6,7 @@ import {
   AccordionDetails,
   Typography,
   Container,
+  Box,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LinkField from '../common/components/LinkField';
@@ -25,11 +26,12 @@ const DeviceConnectionsPage = () => {
   const features = useFeatures();
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout
       menu={<SettingsMenu />}
       breadcrumbs={['settingsTitle', 'sharedDevice', 'sharedConnections']}
     >
-      <Container maxWidth="xs" className={classes.container}>
+      <Container maxWidth="md" className={classes.container}>
         <Accordion defaultExpanded>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant="subtitle1">
@@ -101,6 +103,7 @@ const DeviceConnectionsPage = () => {
         </Accordion>
       </Container>
     </PageLayout>
+    </Box>
   );
 };
 

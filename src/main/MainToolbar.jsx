@@ -18,11 +18,14 @@ import {
   ListItemButton,
   ListItemText,
   Tooltip,
+  Box,
 } from "@mui/material";
 import { makeStyles, useTheme } from "@mui/styles";
-import MapIcon from "@mui/icons-material/Map";
+// import MapIcon from "@mui/icons-material/Map";
+import MapTwoToneIcon from '@mui/icons-material/MapTwoTone';
 import ViewListIcon from "@mui/icons-material/ViewList";
-import AddIcon from "@mui/icons-material/Add";
+// import AddIcon from "@mui/icons-material/Add";
+import AddBoxTwoToneIcon from '@mui/icons-material/AddBoxTwoTone';
 import TuneIcon from "@mui/icons-material/Tune";
 import { useTranslation } from "../common/components/LocalizationProvider";
 import { useDeviceReadonly } from "../common/util/permissions";
@@ -31,7 +34,7 @@ import DeviceRow from "./DeviceRow";
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
-    gap: theme.spacing(1),
+    gap: theme.spacing(2),
   },
   filterPanel: {
     display: "flex",
@@ -74,18 +77,26 @@ const MainToolbar = ({
     Object.values(devices).filter((d) => d.status === status).length;
 
   return (
+    <Box sx={{
+      backgroundColor: "#F6F7F9",
+      borderRadius: "5px",
+      margin: "10px",
+      padding:"5px",
+    }}>
     <Toolbar ref={toolbarRef} className={classes.toolbar}>
+      <Box sx={{ display: 'flex', gap:2, alignItems: 'center' }}>
       <IconButton
-        sx={{ border: "1px solid #909090" }}
+        sx={{borderRadius:"5px" , border: "1px solid #909090"}}
         edge="start"
         onClick={() => setDevicesOpen(!devicesOpen)}
       >
-        {devicesOpen ? <MapIcon /> : <ViewListIcon />}
+        {devicesOpen ? <MapTwoToneIcon /> : <ViewListIcon />}
       </IconButton>
       <OutlinedInput
         ref={inputRef}
-        sx={{ borderRadius: "10px", border: "1px solid #5c5c5c" }}
-        placeholder={t("sharedSearchDevices")}
+        sx={{ borderRadius: "5px", border: "1px solid #5c5c5c", height:"40px"}}
+        // placeholder={t("sharedSearchDevices")}
+        placeholder="Search"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         onFocus={() => setDevicesAnchorEl(toolbarRef.current)}
@@ -231,7 +242,8 @@ const MainToolbar = ({
         onClick={() => navigate("/settings/device")}
         disabled={deviceReadonly}
         sx={{
-          border: "1px solid #909090",
+          borderRadius:"5px",
+          border: "1px solid #909090"
         }}
       >
         <Tooltip
@@ -239,10 +251,13 @@ const MainToolbar = ({
           title={t("deviceRegisterFirst")}
           arrow
         >
-          <AddIcon />
+          {/* <AddIcon /> */}
+          <AddBoxTwoToneIcon />
         </Tooltip>
       </IconButton>
+      </Box>
     </Toolbar>
+    </Box>
   );
 };
 

@@ -610,6 +610,13 @@ const UserPage = () => {
                   value={deleteEmail}
                   onChange={(e) => setDeleteEmail(e.target.value)}
                   label={t('userEmail')}
+                  sx={{
+                    backgroundColor: "white",
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'white', 
+                  },
+                
+                }}
                   error={deleteFailed}
                 />
                 <Button
