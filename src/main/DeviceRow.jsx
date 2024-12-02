@@ -85,7 +85,7 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
 
   return (
     // <div style={style}>
-    <Box style={style} className={classes.container} sx={{ fontFamily: ' "DM Sans Variable", "apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" '}}>
+    <Box style={style} className={classes.container}>
       <ListItemButton disableGutters key={link}  component={Link} to={link}
         sx={{
           pl: 2,

@@ -77,16 +77,18 @@ const MainToolbar = ({
     Object.values(devices).filter((d) => d.status === status).length;
 
   return (
-    <Box sx={{
-      backgroundColor: "#F6F7F9",
-      borderRadius: "5px",
-      margin: "10px",
-      padding:"5px",
-    }}>
+    <Box  sx={{
+      backgroundColor:"#F9FAFA",
+      // padding:"5px",
+      margin:"10px",
+      borderRadius:"5px",
+
+    }}
+    >
     <Toolbar ref={toolbarRef} className={classes.toolbar}>
-      <Box sx={{ display: 'flex', gap:2, alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', gap:1, alignItems: 'center' }}>
       <IconButton
-        sx={{borderRadius:"5px" , border: "1px solid #909090"}}
+        sx={{ borderRadius:"2px" ,  border: "1px solid #909090" , height:"30px"}}
         edge="start"
         onClick={() => setDevicesOpen(!devicesOpen)}
       >
@@ -94,7 +96,24 @@ const MainToolbar = ({
       </IconButton>
       <OutlinedInput
         ref={inputRef}
-        sx={{ borderRadius: "5px", border: "1px solid #5c5c5c", height:"40px"}}
+        sx={{
+          fontFamily: '"DM Sans Variable", "apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+          fontWeight: 400,
+          fontSize: '1rem',
+          // lineHeight: 1.4375,
+          color: 'var(--palette-text-primary)',
+          boxSizing: "borderBox",
+          cursor: "text",
+          display: "inlineFlex",
+          webkitBoxAlign: "center",
+          alignItems: "center",
+          width: "100%",
+          // position: "relative",
+          borderRadius: 'var(--shape-borderRadius)',
+          // paddingleft: "14px",
+          maxwidth: "320px",
+          height:"35px",
+      }}
         // placeholder={t("sharedSearchDevices")}
         placeholder="Search"
         value={keyword}
@@ -242,8 +261,9 @@ const MainToolbar = ({
         onClick={() => navigate("/settings/device")}
         disabled={deviceReadonly}
         sx={{
-          borderRadius:"5px",
-          border: "1px solid #909090"
+          borderRadius:"2px",
+          border: "1px solid #909090",
+          height:"30px"
         }}
       >
         <Tooltip
