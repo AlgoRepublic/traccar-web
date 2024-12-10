@@ -54,7 +54,7 @@ const EventPage = () => {
 
   useEffectAsync(async () => {
     if (id) {
-      const response = await fetch(`/api/events/${id}`);
+      const response = await fetch(`http://localhost:8082/api/events/${id}`);
       if (response.ok) {
         setEvent(await response.json());
       } else {
@@ -65,7 +65,7 @@ const EventPage = () => {
 
   useEffectAsync(async () => {
     if (event && event.positionId) {
-      const response = await fetch(`/api/positions?id=${event.positionId}`);
+      const response = await fetch(`http://localhost:8082/api/positions?id=${event.positionId}`);
       if (response.ok) {
         const positions = await response.json();
         if (positions.length > 0) {

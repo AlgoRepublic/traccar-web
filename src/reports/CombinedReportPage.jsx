@@ -54,7 +54,7 @@ const CombinedReportPage = () => {
     groupIds.forEach((groupId) => query.append("groupId", groupId));
     setLoading(true);
     try {
-      const response = await fetch(`/api/reports/combined?${query.toString()}`);
+      const response = await fetch(`http://localhost:8082/api/reports/combined?${query.toString()}`);
       if (response.ok) {
         setItems(await response.json());
       } else {

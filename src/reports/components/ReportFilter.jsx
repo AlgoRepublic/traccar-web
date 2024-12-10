@@ -7,6 +7,7 @@ import {
   Button,
   TextField,
   Typography,
+  Box,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
@@ -111,23 +112,35 @@ const ReportFilter = ({
     <div className={classes.filter}>
       {!ignoreDevice && (
         <div className={classes.filterItem}>
-          <SelectField
-            label={t(multiDevice ? "deviceTitle" : "reportDevice")}
-            data={Object.values(devices).sort((a, b) =>
-              a.name.localeCompare(b.name)
-            )}
-            value={multiDevice ? deviceIds : deviceId}
-            onChange={(e) =>
-              dispatch(
-                multiDevice
-                  ? devicesActions.selectIds(e.target.value)
-                  : devicesActions.selectId(e.target.value)
-              )
-            }
-            multiple={multiDevice}
-            fullWidth
-          />
-        </div>
+        <SelectField
+          sx={{
+            "& .MuiInputBase-root": {
+              padding: "12px 32px", // Padding for the input base
+            },
+            "& .MuiOutlinedInput-root": {
+              padding: "12px 32px", // Padding for outlined variant container
+            },
+            "& .MuiSelect-select": {
+              padding: "12px 32px", // Padding for the select dropdown content
+            },
+          }}
+          label={t(multiDevice ? "deviceTitle" : "reportDevice")}
+          data={Object.values(devices).sort((a, b) =>
+            a.name.localeCompare(b.name)
+          )}
+          value={multiDevice ? deviceIds : deviceId}
+          onChange={(e) =>
+            dispatch(
+              multiDevice
+                ? devicesActions.selectIds(e.target.value)
+                : devicesActions.selectId(e.target.value)
+            )
+          }
+          multiple={multiDevice}
+          fullWidth
+        />
+      </div>
+      
       )}
       {includeGroups && (
         <div className={classes.filterItem}>
@@ -236,11 +249,8 @@ const ReportFilter = ({
             disabled={disabled}
             onClick={() => handleClick("json")}
             sx={{
-              // backgroundColor: "#5c5c5c",
-              // color: "#fff",
-              // borderRadius: "100px",
               height:"100%",
-              backgroundColor: "rgb(133, 37, 8) !important",
+              backgroundColor: "#1c252e !important",
               color: "#fff !important",
               borderRadius: "4px",
               border: "1px solid #909090",
@@ -252,29 +262,30 @@ const ReportFilter = ({
             </Typography>
           </Button>
         ) : (
-          <SplitButton
-            fullWidth
-            variant="outlined"
-            color="secondary"
-            disabled={disabled}
-            onClick={handleClick}
-            selected={button}
-            setSelected={(value) => setButton(value)}
-            options={
-              readonly
-                ? {
-                    json: t("reportShow"),
-                    export: t("reportExport"),
-                    mail: t("reportEmail"),
-                  }
-                : {
-                    json: t("reportShow"),
-                    export: t("reportExport"),
-                    mail: t("reportEmail"),
-                    schedule: t("reportSchedule"),
-                  }
-            }
-          />
+        
+  <SplitButton
+          fullWidth
+          variant="outlined"
+          color="secondary"
+          disabled={disabled}
+          onClick={handleClick}
+          selected={button}
+          setSelected={(value) => setButton(value)}
+          options={
+            readonly
+              ? {
+                  json: t("reportShow"),
+                  export: t("reportExport"),
+                  mail: t("reportEmail"),
+                }
+              : {
+                  json: t("reportShow"),
+                  export: t("reportExport"),
+                  mail: t("reportEmail"),
+                  schedule: t("reportSchedule"),
+                }
+          }
+        />
         )}
       </div>
     </div>

@@ -71,11 +71,11 @@ const Navigation = () => {
   useEffectAsync(async () => {
     if (query.get('token')) {
       const token = query.get('token');
-      await fetch(`/api/session?token=${encodeURIComponent(token)}`);
+      await fetch(`http://localhost:8082/api/session?token=${encodeURIComponent(token)}`);
       navigate(pathname);
     } else if (query.get('deviceId')) {
       const deviceId = query.get('deviceId');
-      const response = await fetch(`/api/devices?uniqueId=${deviceId}`);
+      const response = await fetch(`http://localhost:8082/api/devices?uniqueId=${deviceId}`);
       if (response.ok) {
         const items = await response.json();
         if (items.length > 0) {

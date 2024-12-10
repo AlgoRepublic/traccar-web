@@ -28,7 +28,7 @@ const GeofencesList = ({ onGeofenceSelected }) => {
   const items = useSelector((state) => state.geofences.items);
 
   const refreshGeofences = useCatchCallback(async () => {
-    const response = await fetch('/api/geofences');
+    const response = await fetch('http://localhost:8082/api/geofences');
     if (response.ok) {
       dispatch(geofencesActions.refresh(await response.json()));
     } else {

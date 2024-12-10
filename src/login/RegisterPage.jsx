@@ -47,7 +47,7 @@ const RegisterPage = () => {
 
   useEffectAsync(async () => {
     if (totpForce) {
-      const response = await fetch('/api/users/totp', { method: 'POST' });
+      const response = await fetch('http://localhost:8082/api/users/totp', { method: 'POST' });
       if (response.ok) {
         setTotpKey(await response.text());
       } else {
@@ -58,7 +58,7 @@ const RegisterPage = () => {
 
   const handleSubmit = useCatch(async (event) => {
     event.preventDefault();
-    const response = await fetch('/api/users', {
+    const response = await fetch('http://localhost:8082/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password, totpKey }),

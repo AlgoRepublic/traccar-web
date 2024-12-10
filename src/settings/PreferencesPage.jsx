@@ -57,7 +57,7 @@ const PreferencesPage = () => {
 
   const generateToken = useCatch(async () => {
     const expiration = dayjs(tokenExpiration, 'YYYY-MM-DD').toISOString();
-    const response = await fetch('/api/session/token', {
+    const response = await fetch('http://localhost:8082/api/session/token', {
       method: 'POST',
       body: new URLSearchParams(`expiration=${expiration}`),
     });
@@ -74,7 +74,7 @@ const PreferencesPage = () => {
   }));
 
   const handleSave = useCatch(async () => {
-    const response = await fetch(`/api/users/${user.id}`, {
+    const response = await fetch(`http://localhost:8082/api/users/${user.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...user, attributes }),
@@ -88,7 +88,7 @@ const PreferencesPage = () => {
   });
 
   const handleReboot = useCatch(async () => {
-    const response = await fetch('/api/server/reboot', { method: 'POST' });
+    const response = await fetch('http://localhost:8082/api/server/reboot', { method: 'POST' });
     throw Error(response.statusText);
   });
 

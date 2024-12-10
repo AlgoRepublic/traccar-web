@@ -68,7 +68,7 @@ const UserPage = () => {
   const handleDelete = useCatch(async () => {
     if (deleteEmail === currentUser.email) {
       setDeleteFailed(false);
-      const response = await fetch(`/api/users/${currentUser.id}`, { method: 'DELETE' });
+      const response = await fetch(`http://localhost:8082/api/users/${currentUser.id}`, { method: 'DELETE' });
       if (response.ok) {
         navigate('/login');
         dispatch(sessionActions.updateUser(null));
@@ -81,7 +81,7 @@ const UserPage = () => {
   });
 
   const handleGenerateTotp = useCatch(async () => {
-    const response = await fetch('/api/users/totp', { method: 'POST' });
+    const response = await fetch('http://localhost:8082/api/users/totp', { method: 'POST' });
     if (response.ok) {
       setItem({ ...item, totpKey: await response.text() });
     } else {

@@ -31,7 +31,7 @@ const UsersPage = () => {
   const [temporary, setTemporary] = useState(false);
 
   const handleLogin = useCatch(async (userId) => {
-    const response = await fetch(`/api/session/${userId}`);
+    const response = await fetch(`http://localhost:8082/api/session/${userId}`);
     if (response.ok) {
       window.location.replace('/');
     } else {
@@ -56,7 +56,7 @@ const UsersPage = () => {
   useEffectAsync(async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/users');
+      const response = await fetch('http://localhost:8082/api/users');
       if (response.ok) {
         setItems(await response.json());
       } else {

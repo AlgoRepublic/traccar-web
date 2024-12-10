@@ -38,7 +38,7 @@
 //     setLoading(true);
 //     try {
 //       const query = new URLSearchParams({ all: showAll });
-//       const response = await fetch(`/api/devices?${query.toString()}`);
+//       const response = await fetch(`http://localhost:8082/api/devices?${query.toString()}`);
 //       if (response.ok) {
 //         setItems(await response.json());
 //       } else {
@@ -207,7 +207,7 @@ const DevicesPage = () => {
     setLoading(true);
     try {
       const query = new URLSearchParams({ all: showAll });
-      const response = await fetch(`/api/devices?${query.toString()}`);
+      const response = await fetch(`http://localhost:8082/api/devices?${query.toString()}`);
       if (response.ok) {
         setItems(await response.json());
       } else {

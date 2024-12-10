@@ -10,7 +10,7 @@ const DeviceUsersValue = ({ deviceId }) => {
 
   const loadUsers = useCatch(async () => {
     const query = new URLSearchParams({ deviceId });
-    const response = await fetch(`/api/users?${query.toString()}`);
+    const response = await fetch(`http://localhost:8082/api/users?${query.toString()}`);
     if (response.ok) {
       setUsers(await response.json());
     } else {

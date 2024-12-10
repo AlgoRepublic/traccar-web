@@ -41,7 +41,7 @@ const LogsPage = () => {
     <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<ReportsMenu />} breadcrumbs={['reportTitle', 'statisticsTitle']}>
 
-    <div className={classes.containerMain}>
+    <div className={classes.containerMain} style={{backgroundColor:"#fff" , borderRadius:"10px", margin:"10px" }}>
       <Table>
         <TableHead>
           <TableRow>

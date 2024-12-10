@@ -33,7 +33,7 @@ const ScheduledPage = () => {
   useEffectAsync(async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/reports');
+      const response = await fetch('http://localhost:8082/api/reports');
       if (response.ok) {
         setItems(await response.json());
       } else {
@@ -64,7 +64,7 @@ const ScheduledPage = () => {
   return (
     <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<ReportsMenu />} breadcrumbs={['settingsTitle', 'reportScheduled']}>
-    <div className={classes.containerMain}>
+    <div className={classes.containerMain} style={{backgroundColor:"#fff" , borderRadius:"10px", margin:"10px" }}>
       <Table>
         <TableHead>
           <TableRow>

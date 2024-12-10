@@ -5,6 +5,7 @@ import {
   TableCell,
   TableHead,
   TableBody,
+  Box,
 } from "@mui/material";
 import { formatTime } from "../common/util/formatter";
 import { useTranslation } from "../common/components/LocalizationProvider";
@@ -48,7 +49,7 @@ const StatisticsPage = () => {
     setLoading(true);
     try {
       const query = new URLSearchParams({ from, to });
-      const response = await fetch(`/api/statistics?${query.toString()}`);
+      const response = await fetch(`http://localhost:8082/api/statistics?${query.toString()}`);
       if (response.ok) {
         setItems(await response.json());
       } else {
@@ -60,10 +61,12 @@ const StatisticsPage = () => {
   });
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout
       menu={<ReportsMenu />}
       breadcrumbs={["reportTitle", "statisticsTitle"]}
     >
+      <div className={classes.container} style={{backgroundColor:"#fff" , borderRadius:"10px", margin:"10px"}}>
       <div className={classes.header}>
         <ReportFilter
           handleSubmit={handleSubmit}
@@ -104,7 +107,10 @@ const StatisticsPage = () => {
           )}
         </TableBody>
       </Table>
+      </div>
+     
     </PageLayout>
+    </Box>
   );
 };
 

@@ -78,7 +78,7 @@ const BottomMenu = () => {
                 : undefined,
           },
         };
-        await fetch(`/api/users/${user.id}`, {
+        await fetch(`http://localhost:8082/api/users/${user.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(updatedUser),

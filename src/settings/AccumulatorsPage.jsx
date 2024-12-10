@@ -42,7 +42,7 @@ const AccumulatorsPage = () => {
   }, [deviceId, position]);
 
   const handleSave = useCatch(async () => {
-    const response = await fetch(`/api/devices/${deviceId}/accumulators`, {
+    const response = await fetch(`http://localhost:8082/api/devices/${deviceId}/accumulators`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item),

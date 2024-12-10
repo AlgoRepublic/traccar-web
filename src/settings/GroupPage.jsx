@@ -28,7 +28,7 @@ const GroupPage = () => {
   const [item, setItem] = useState();
 
   const onItemSaved = useCatch(async () => {
-    const response = await fetch('/api/groups');
+    const response = await fetch('http://localhost:8082/api/groups');
     if (response.ok) {
       dispatch(groupsActions.refresh(await response.json()));
     } else {

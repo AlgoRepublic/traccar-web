@@ -30,7 +30,7 @@ const AnnouncementPage = () => {
   const handleSend = useCatchCallback(async () => {
     const query = new URLSearchParams();
     users.forEach((userId) => query.append('userId', userId));
-    const response = await fetch(`/api/notifications/send/${notificator}?${query.toString()}`, {
+    const response = await fetch(`http://localhost:8082/api/notifications/send/${notificator}?${query.toString()}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(message),
