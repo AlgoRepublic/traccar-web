@@ -39,6 +39,12 @@ import {
 //   </ListItemButton>
 // );
 
+// const MenuItem = ({ title, link, icon, selected }) => (
+//   <ListItemButton key={link} component={Link} to={link} selected={selected}>
+//     <ListItemIcon>{icon}</ListItemIcon>
+//     <ListItemText primary={title} />
+//   </ListItemButton>
+// );
 const MenuItem = ({
   title, link, icon, selected,
 }) => (
@@ -51,10 +57,9 @@ const MenuItem = ({
       m:1.3,
       borderRadius: '6px',
       fontSize: '14px',
-      fontWeight: 500,
+      fontWeight: 600,
       lineHeight: 1.5,
       color: '#637381',
-
       bgcolor: "#fff",
       '&:hover': { bgcolor: '#F6F7F9', color: '#637381', },
       ...(selected && {
@@ -70,17 +75,15 @@ const MenuItem = ({
     <Box component="span" sx={{ width: 24, height: 24 }}>
       {icon}
     </Box>
-
     <Box component="span" flexGrow={1}>
       {title}
     </Box>
-
     {/* <ListItemIcon
      sx={{ color: selected ? '#637381' : 'text.primary'  }}
      >{icon}</ListItemIcon>
     <ListItemText primary={<Typography variant="subtitle1" color="#637381" >{title} </Typography> } 
     /> */}
-  </ListItemButton>
+     </ListItemButton>
 );
 
 const ReportsMenu = () => {
@@ -91,7 +94,7 @@ const ReportsMenu = () => {
 
   return (
     <>
-      <List>
+      <List sx={{ fontFamily: '"DM Sans Variable", "apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' }}>
         <MenuItem
           title={t("reportCombined")}
           link="/reports/combined"
@@ -160,7 +163,7 @@ const ReportsMenu = () => {
             title={t("reportScheduled")}
             link="/reports/scheduled"
             // icon={<EventRepeatIcon />}
-           icon={<EventRepeatTwoToneIcon />}
+            icon={<EventRepeatTwoToneIcon />}
             selected={location.pathname === "/reports/scheduled"}
           />
         )}

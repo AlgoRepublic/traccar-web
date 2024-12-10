@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Table, TableRow, TableCell, TableHead, TableBody, IconButton, Tooltip,
+  Table, TableRow, TableCell, TableHead, TableBody, IconButton, Tooltip,Box,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -38,7 +38,10 @@ const LogsPage = () => {
   };
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<ReportsMenu />} breadcrumbs={['reportTitle', 'statisticsTitle']}>
+
+    <div className={classes.containerMain}>
       <Table>
         <TableHead>
           <TableRow>
@@ -71,7 +74,9 @@ const LogsPage = () => {
           ))}
         </TableBody>
       </Table>
+      </div>
     </PageLayout>
+    </Box>
   );
 };
 

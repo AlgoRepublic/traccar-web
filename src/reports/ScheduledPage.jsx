@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  Table, TableRow, TableCell, TableHead, TableBody, IconButton,
+  Table, TableRow, TableCell, TableHead, TableBody, IconButton,Box,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -62,7 +62,9 @@ const ScheduledPage = () => {
   };
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<ReportsMenu />} breadcrumbs={['settingsTitle', 'reportScheduled']}>
+    <div className={classes.containerMain}>
       <Table>
         <TableHead>
           <TableRow>
@@ -99,7 +101,9 @@ const ScheduledPage = () => {
           }
         }}
       />
+         </div>
     </PageLayout>
+    </Box>
   );
 };
 

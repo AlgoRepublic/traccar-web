@@ -66,10 +66,9 @@ const MenuItem = ({
       m:1.3,
       borderRadius: '6px',
       fontSize: '14px',
-      fontWeight: 500,
+      fontWeight: 600,
       lineHeight: 1.5,
       color: '#637381',
-
       bgcolor: "#fff",
       '&:hover': { bgcolor: '#F6F7F9', color: '#637381', },
       ...(selected && {

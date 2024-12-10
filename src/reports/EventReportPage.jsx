@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FormControl, InputLabel, Select, MenuItem, Table, TableHead, TableRow, TableCell, TableBody, Link, IconButton,
+  FormControl, InputLabel, Select, MenuItem, Table, TableHead, TableRow, TableCell, TableBody, Link, IconButton,Box,
 } from '@mui/material';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
@@ -180,6 +180,7 @@ const EventReportPage = () => {
   };
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout
       menu={<ReportsMenu />}
       breadcrumbs={["reportTitle", "reportEvents"]}
@@ -282,6 +283,7 @@ const EventReportPage = () => {
         </div>
       </div>
     </PageLayout>
+    </Box>
   );
 };
 

@@ -121,7 +121,8 @@ const BottomMenu = () => {
         onChange={handleSelection}
         showLabels
         sx={{
-          backgroundColor:"#F4F6F8"
+          backgroundColor:"#F4F6F8",
+          borderRadius:"5px",
         }}
       >
         <BottomNavigationAction

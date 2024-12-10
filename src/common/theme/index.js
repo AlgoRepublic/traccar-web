@@ -18,7 +18,7 @@ export default (server, darkMode, direction) => useMemo(() => createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          backgroundColor: '#ffffff', 
+          backgroundColor: '#fff', 
           borderRadius: '4px', 
         },
         input: {
@@ -32,11 +32,10 @@ export default (server, darkMode, direction) => useMemo(() => createTheme({
     MuiSelect: {
       styleOverrides: {
         outlined: {
-          backgroundColor: '#ffffff', 
+          backgroundColor: '#fff', 
           padding: '12px 14px', 
         },
       },
     },
   },
-  
 }), [server, darkMode, direction]);

@@ -612,7 +612,6 @@ const UserPage = () => {
                   label={t('userEmail')}
                   sx={{
                     backgroundColor: "white",
-
                   '& .MuiOutlinedInput-root': {
                     backgroundColor: 'white', 
                   },

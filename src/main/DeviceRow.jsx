@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import makeStyles from '@mui/styles/makeStyles';
 import {
-  IconButton, Tooltip, Avatar, ListItemAvatar, ListItemText, ListItemButton,
+  IconButton, Tooltip, Avatar, ListItemAvatar, ListItemText, ListItemButton,Box, Divider,
 } from '@mui/material';
 import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
@@ -42,15 +43,19 @@ const useStyles = makeStyles((theme) => ({
   warning: {
     color: theme.palette.warning.main,
   },
-  error: {
-    color: theme.palette.error.main,
-  },
+  // error: {
+  //   color: theme.palette.error.main,
+  // },
   neutral: {
     color: theme.palette.neutral.main,
   },
+  container: {
+        padding: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+      },
 }));
 
-const DeviceRow = ({ data, index, style }) => {
+const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const t = useTranslation();
@@ -79,9 +84,32 @@ const DeviceRow = ({ data, index, style }) => {
   };
 
   return (
-    <div style={style}>
-      <ListItemButton
-        key={item.id}
+    // <div style={style}>
+    <Box style={style} className={classes.container} sx={{ fontFamily: ' "DM Sans Variable", "apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" '}}>
+      <ListItemButton disableGutters key={link}  component={Link} to={link}
+        sx={{
+          pl: 2,
+          // py: 1.5,
+          gap: 2,
+          pr: 1.5,
+          m:1.3,
+          borderRadius: '6px',
+          fontSize: '14px',
+          fontWeight: 600,
+          lineHeight: 1.5,
+          color: '#637381',
+          bgcolor: "#fff",
+          '&:hover': { bgcolor: '#F6F7F9', color: '#637381', },
+          ...(selected && {
+            fontWeight: 'bold',
+            bgcolor: '#1877F214',
+            color: '#71a0de',
+            '&:hover': {
+              bgcolor: '#cbdff7',
+            },
+          }),
+        }}
+        // key={item.id}
         onClick={() => dispatch(devicesActions.selectId(item.id))}
         disabled={!admin && item.disabled}
       >
@@ -138,7 +166,9 @@ const DeviceRow = ({ data, index, style }) => {
           </>
         )}
       </ListItemButton>
-    </div>
+      {/* <Divider /> */}
+      </Box>
+    // </div>
   );
 };
 

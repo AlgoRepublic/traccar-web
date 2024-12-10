@@ -6,6 +6,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Box,
 } from "@mui/material";
 import ReportFilter from "./components/ReportFilter";
 import { useTranslation } from "../common/components/LocalizationProvider";
@@ -65,6 +66,7 @@ const CombinedReportPage = () => {
   });
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout
       menu={<ReportsMenu />}
       breadcrumbs={["reportTitle", "reportCombined"]}
@@ -131,6 +133,7 @@ const CombinedReportPage = () => {
         </div>
       </div>
     </PageLayout>
+    </Box>
   );
 };
 

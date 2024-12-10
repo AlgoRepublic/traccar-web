@@ -139,6 +139,7 @@ const ComputedAttributesPage = () => {
               sx={{
                 flex: 1,
                 maxWidth: "300px",
+                padding:"10px",
                 backgroundColor: "white",
                 '& .MuiOutlinedInput-root': {
                   backgroundColor: 'white', 

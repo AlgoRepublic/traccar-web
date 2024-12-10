@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-IconButton, Table, TableBody, TableCell, TableHead, TableRow,
+  IconButton,
+  Table, TableBody, TableCell, TableHead, TableRow,Box,
 } from '@mui/material';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
@@ -108,6 +109,7 @@ const StopReportPage = () => {
   };
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<ReportsMenu />} breadcrumbs={['reportTitle', 'reportStops']}>
       <div className={classes.container}>
         {selectedItem && (
@@ -167,6 +169,7 @@ const StopReportPage = () => {
         </div>
       </div>
     </PageLayout>
+    </Box>
   );
 };
 
