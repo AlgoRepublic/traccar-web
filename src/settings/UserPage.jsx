@@ -438,6 +438,15 @@ const UserPage = () => {
                     zoom: Number(map.getZoom().toFixed(1)),
                   });
                 }}
+                sx={{
+                  color: "Black", //
+                  borderColor: "lightgrey", 
+                  "&:hover": {
+                    backgroundColor: "#F4F6F8", 
+                    borderColor: "black", 
+                    color :"black",
+                  },
+                }} 
               >
                 {t('mapCurrentLocation')}
               </Button>
@@ -498,95 +507,172 @@ const UserPage = () => {
               />
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox checked={item.disabled} onChange={(e) => setItem({ ...item, disabled: e.target.checked })} />}
+                  control={<Checkbox checked={item.disabled} onChange={(e) => setItem({ ...item, disabled: e.target.checked })}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#1877F2', 
+                    },
+                    '& .MuiCheckbox-root': {
+                      backgroundColor: 'white', 
+                    },
+                    '&.Mui-checked .MuiCheckbox-root': {
+                      backgroundColor: 'black', 
+                    },
+                  }}
+                  />}
                   label={t('sharedDisabled')}
                   disabled={!manager}
-                  sx={{
-                    backgroundColor: "white",
+                //   sx={{
+                //     backgroundColor: "white",
 
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
-                
-                }}
+                //   '& .MuiOutlinedInput-root': {
+                //     backgroundColor: 'white', 
+                //   },
+                // }}
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={item.administrator} onChange={(e) => setItem({ ...item, administrator: e.target.checked })} />}
+                  control={<Checkbox checked={item.administrator} onChange={(e) => setItem({ ...item, administrator: e.target.checked })}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#1877F2', 
+                    },
+                    '& .MuiCheckbox-root': {
+                      backgroundColor: 'white', 
+                    },
+                    '&.Mui-checked .MuiCheckbox-root': {
+                      backgroundColor: 'black', 
+                    },
+                  }} />}
                   label={t('userAdmin')}
                   disabled={!admin}
-                  sx={{
-                    backgroundColor: "white",
+                //   sx={{
+                //     backgroundColor: "white",
 
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
+                //   '& .MuiOutlinedInput-root': {
+                //     backgroundColor: 'white', 
+                //   },
                 
-                }}
+                // }}
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={item.readonly} onChange={(e) => setItem({ ...item, readonly: e.target.checked })} />}
+                  control={<Checkbox checked={item.readonly} onChange={(e) => setItem({ ...item, readonly: e.target.checked })}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#1877F2', 
+                    },
+                    '& .MuiCheckbox-root': {
+                      backgroundColor: 'white', 
+                    },
+                    '&.Mui-checked .MuiCheckbox-root': {
+                      backgroundColor: 'black', 
+                    },
+                  }} />}
+                  
                   label={t('serverReadonly')}
                   disabled={!manager}
-                  sx={{
-                    backgroundColor: "white",
+                //   sx={{
+                //     backgroundColor: "white",
 
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
-                
-                }}
+                //   '& .MuiOutlinedInput-root': {
+                //     backgroundColor: 'white', 
+                //   },
+                // }}
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={item.deviceReadonly} onChange={(e) => setItem({ ...item, deviceReadonly: e.target.checked })} />}
+                  control={<Checkbox checked={item.deviceReadonly} onChange={(e) => setItem({ ...item, deviceReadonly: e.target.checked })}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#1877F2', 
+                    },
+                    '& .MuiCheckbox-root': {
+                      backgroundColor: 'white', 
+                    },
+                    '&.Mui-checked .MuiCheckbox-root': {
+                      backgroundColor: 'black', 
+                    },
+                  }} />}
                   label={t('userDeviceReadonly')}
                   disabled={!manager}
-                  sx={{
-                    backgroundColor: "white",
+                //   sx={{
+                //     backgroundColor: "white",
 
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
+                //   '& .MuiOutlinedInput-root': {
+                //     backgroundColor: 'white', 
+                //   },
                 
-                }}
+                // }}
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={item.limitCommands} onChange={(e) => setItem({ ...item, limitCommands: e.target.checked })} />}
+                  control={<Checkbox checked={item.limitCommands} onChange={(e) => setItem({ ...item, limitCommands: e.target.checked })}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#1877F2', 
+                    },
+                    '& .MuiCheckbox-root': {
+                      backgroundColor: 'white', 
+                    },
+                    '&.Mui-checked .MuiCheckbox-root': {
+                      backgroundColor: 'black', 
+                    },
+                  }} />}
                   label={t('userLimitCommands')}
                   disabled={!manager}
-                  sx={{
-                    backgroundColor: "white",
+                //   sx={{
+                //     backgroundColor: "white",
 
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
+                //   '& .MuiOutlinedInput-root': {
+                //     backgroundColor: 'white', 
+                //   },
                 
-                }}
+                // }}
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={item.disableReports} onChange={(e) => setItem({ ...item, disableReports: e.target.checked })} />}
+                  control={<Checkbox checked={item.disableReports} onChange={(e) => setItem({ ...item, disableReports: e.target.checked })}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#1877F2', 
+                    },
+                    '& .MuiCheckbox-root': {
+                      backgroundColor: 'white', 
+                    },
+                    '&.Mui-checked .MuiCheckbox-root': {
+                      backgroundColor: 'black', 
+                    },
+                  }} />}
                   label={t('userDisableReports')}
                   disabled={!manager}
-                  sx={{
-                    backgroundColor: "white",
+                //   sx={{
+                //     backgroundColor: "white",
 
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
+                //   '& .MuiOutlinedInput-root': {
+                //     backgroundColor: 'white', 
+                //   },
                 
-                }}
+                // }}
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={item.fixedEmail} onChange={(e) => setItem({ ...item, fixedEmail: e.target.checked })} />}
+                  control={<Checkbox checked={item.fixedEmail} onChange={(e) => setItem({ ...item, fixedEmail: e.target.checked })}
+                  sx={{
+                    '&.Mui-checked': {
+                      color: '#1877F2', 
+                    },
+                    '& .MuiCheckbox-root': {
+                      backgroundColor: 'white', 
+                    },
+                    '&.Mui-checked .MuiCheckbox-root': {
+                      backgroundColor: 'black', 
+                    },
+                  }} />}
                   label={t('userFixedEmail')}
                   disabled={!manager}
-                  sx={{
-                    backgroundColor: "white",
+                //   sx={{
+                //     backgroundColor: "white",
 
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
+                //   '& .MuiOutlinedInput-root': {
+                //     backgroundColor: 'white', 
+                //   },
                 
-                }}
+                // }}
                 />
               </FormGroup>
             </AccordionDetails>

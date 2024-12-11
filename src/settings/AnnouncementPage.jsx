@@ -8,6 +8,7 @@ import {
   Container,
   TextField,
   Button,
+  Box,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTranslation } from '../common/components/LocalizationProvider';
@@ -43,8 +44,9 @@ const AnnouncementPage = () => {
   }, [users, notificator, message, navigate]);
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<SettingsMenu />} breadcrumbs={['serverAnnouncement']}>
-      <Container maxWidth="xs" className={classes.container}>
+      <Container maxWidth="md" className={classes.container}>
         <Accordion defaultExpanded>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant="subtitle1">
@@ -85,6 +87,13 @@ const AnnouncementPage = () => {
             color="primary"
             variant="outlined"
             onClick={() => navigate(-1)}
+            sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
+              "&:hover": {
+                backgroundColor:"#F4F6F8",
+                color:"black",
+                borderColor:"black"
+              }
+              }}
           >
             {t('sharedCancel')}
           </Button>
@@ -93,6 +102,14 @@ const AnnouncementPage = () => {
             color="primary"
             variant="contained"
             onClick={handleSend}
+            sx={{
+              backgroundColor: "black", 
+              "&:hover": {
+                // backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                backgroundColor:"black"
+              },
+              color: "white", 
+            }}
             disabled={!notificator || !message.subject || !message.body}
           >
             {t('commandSend')}
@@ -100,6 +117,7 @@ const AnnouncementPage = () => {
         </div>
       </Container>
     </PageLayout>
+    </Box>
   );
 };
 

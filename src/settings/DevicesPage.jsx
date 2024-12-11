@@ -324,7 +324,13 @@ navigate('/settings/device')
           <Typography variant="h5" sx={{ flex: 1 }} >
             {t("deviceTitle")}
           </Typography>
-          <Button onClick={handleNavigate} variant="contained" startIcon={<Add />}>
+          <Button onClick={handleNavigate} variant="contained" startIcon={<Add />}  sx={{
+    backgroundColor: "black", 
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.8)", 
+    },
+    color: "white", 
+  }}>
             New Device
           </Button>
         </Box>
@@ -512,7 +518,13 @@ navigate('/settings/device')
           }}
         >
           <Box>
-            <Button variant="outlined" onClick={handleExport}>
+            <Button variant="outlined" onClick={handleExport} sx={{borderColor:"black", color:"black",
+          "&:hover": {
+            backgroundColor:"#F6F7F9",
+            color:"black",
+            borderColor:"black"
+          }
+          }}>
               {t("reportExport")}
             </Button>
           </Box>

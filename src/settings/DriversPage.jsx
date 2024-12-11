@@ -96,10 +96,16 @@ const DriversPage = () => {
             startIcon={<AddIcon />}
             onClick={() => navigate("/settings/driver")}
             sx={{
-              padding: "10px 20px",
-              textTransform: "none",
-              fontSize: "14px",
-              borderRadius: "8px",
+              // padding: "10px 20px",
+              // textTransform: "none",
+              // fontSize: "14px",
+              // borderRadius: "8px",
+             
+                backgroundColor: "black", 
+                "&:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                },
+                color: "white",
             }}
           >
             {t("newDriver")} New Driver

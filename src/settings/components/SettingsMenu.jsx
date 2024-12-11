@@ -229,7 +229,7 @@ const SettingsMenu = () => {
               <MenuItem
                 title={t('settingsServer')}
                 link="/settings/server"
-                icon={<StorageIcon />}
+                icon={<StorageTwoToneIcon />}
                 selected={location.pathname === '/settings/server'}
               />
             )}

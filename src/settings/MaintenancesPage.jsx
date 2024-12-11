@@ -160,10 +160,15 @@ const handleNavigate=()=>{
             variant="contained"
             startIcon={<AddIcon />}
             sx={{
-              padding: "10px 20px",
-              textTransform: "none",
-              fontSize: "14px",
-              borderRadius: "8px",
+              // padding: "10px 20px",
+              // textTransform: "none",
+              // fontSize: "14px",
+              // borderRadius: "8px",
+                backgroundColor: "black", 
+                "&:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                },
+                color: "white", 
             }}
             onClick={handleNavigate}
           >

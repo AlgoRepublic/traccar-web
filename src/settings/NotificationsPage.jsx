@@ -161,7 +161,15 @@ const NotificationsPage = () => {
           <Typography variant="h5" sx={{ flex: 1 }}>
             {t("sharedNotifications")}
           </Typography>
-          <Button  variant="contained" startIcon={<Add />} onClick={handleNavigate}>
+          <Button  variant="contained" startIcon={<Add />} onClick={handleNavigate} 
+  sx={{
+    backgroundColor: "black", 
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.8)", 
+    },
+    color: "white", 
+  }}
+>
             {t("newNotification")} New Notification
           </Button>
         </Box>

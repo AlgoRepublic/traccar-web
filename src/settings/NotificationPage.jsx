@@ -117,6 +117,12 @@ const NotificationPage = () => {
                     <Checkbox
                       checked={item.always}
                       onChange={(e) => setItem({ ...item, always: e.target.checked })}
+                      sx={{
+                        color: "black",
+                        "&.Mui-checked": {
+                          color: "#1877F2", 
+                        },
+                      }}
                     />
                     )}
                   label={t('notificationAlways')}

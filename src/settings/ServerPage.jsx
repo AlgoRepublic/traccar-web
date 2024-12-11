@@ -15,6 +15,7 @@ import {
   Select,
   MenuItem,
   FormGroup,
+  Box,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useNavigate } from 'react-router-dom';
@@ -77,8 +78,9 @@ const ServerPage = () => {
   });
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<SettingsMenu />} breadcrumbs={['settingsTitle', 'settingsServer']}>
-      <Container maxWidth="xs" className={classes.container}>
+      <Container maxWidth="md" className={classes.container}>
         {item && (
           <>
             <Accordion defaultExpanded>
@@ -191,7 +193,14 @@ const ServerPage = () => {
                 />
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox checked={item.forceSettings} onChange={(event) => setItem({ ...item, forceSettings: event.target.checked })} />}
+                    control={<Checkbox checked={item.forceSettings} onChange={(event) => setItem({ ...item, forceSettings: event.target.checked })}
+                    sx={{
+                      color: "black",
+                      "&.Mui-checked": {
+                        color: "#1877F2", 
+                      },
+                    }}
+                    />}
                     label={t('serverForceSettings')}
                   />
                 </FormGroup>
@@ -234,6 +243,15 @@ const ServerPage = () => {
                       zoom: Number(map.getZoom().toFixed(1)),
                     });
                   }}
+                  sx={{
+                    color: "Black", //
+                    borderColor: "lightgrey", 
+                    "&:hover": {
+                      backgroundColor: "#F4F6F8", 
+                      borderColor: "black", 
+                      color :"black",
+                    },
+                  }} 
                 >
                   {t('mapCurrentLocation')}
                 </Button>
@@ -248,27 +266,69 @@ const ServerPage = () => {
               <AccordionDetails className={classes.details}>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox checked={item.registration} onChange={(event) => setItem({ ...item, registration: event.target.checked })} />}
+                    control={<Checkbox checked={item.registration} onChange={(event) => setItem({ ...item, registration: event.target.checked })}
+                    sx={{
+                      color: "black",
+                      "&.Mui-checked": {
+                        color: "#1877F2", 
+                      },
+                    }}
+                    />}
                     label={t('serverRegistration')}
                   />
                   <FormControlLabel
-                    control={<Checkbox checked={item.readonly} onChange={(event) => setItem({ ...item, readonly: event.target.checked })} />}
+                    control={<Checkbox checked={item.readonly} onChange={(event) => setItem({ ...item, readonly: event.target.checked })}
+                    sx={{
+                      color: "black",
+                      "&.Mui-checked": {
+                        color: "#1877F2", 
+                      },
+                    }}
+                    />}
                     label={t('serverReadonly')}
                   />
                   <FormControlLabel
-                    control={<Checkbox checked={item.deviceReadonly} onChange={(event) => setItem({ ...item, deviceReadonly: event.target.checked })} />}
+                    control={<Checkbox checked={item.deviceReadonly} onChange={(event) => setItem({ ...item, deviceReadonly: event.target.checked })}
+                    sx={{
+                      color: "black",
+                      "&.Mui-checked": {
+                        color: "#1877F2", 
+                      },
+                    }}
+                    />}
                     label={t('userDeviceReadonly')}
                   />
                   <FormControlLabel
-                    control={<Checkbox checked={item.limitCommands} onChange={(event) => setItem({ ...item, limitCommands: event.target.checked })} />}
+                    control={<Checkbox checked={item.limitCommands} onChange={(event) => setItem({ ...item, limitCommands: event.target.checked })}
+                    sx={{
+                      color: "black",
+                      "&.Mui-checked": {
+                        color: "#1877F2", 
+                      },
+                    }}
+                    />}
                     label={t('userLimitCommands')}
                   />
                   <FormControlLabel
-                    control={<Checkbox checked={item.disableReports} onChange={(event) => setItem({ ...item, disableReports: event.target.checked })} />}
+                    control={<Checkbox checked={item.disableReports} onChange={(event) => setItem({ ...item, disableReports: event.target.checked })}
+                    sx={{
+                      color: "black",
+                      "&.Mui-checked": {
+                        color: "#1877F2", 
+                      },
+                    }}
+                    />}
                     label={t('userDisableReports')}
                   />
                   <FormControlLabel
-                    control={<Checkbox checked={item.fixedEmail} onChange={(e) => setItem({ ...item, fixedEmail: e.target.checked })} />}
+                    control={<Checkbox checked={item.fixedEmail} onChange={(e) => setItem({ ...item, fixedEmail: e.target.checked })}
+                    sx={{
+                      color: "black",
+                      "&.Mui-checked": {
+                        color: "#1877F2", 
+                      },
+                    }}
+                    />}
                     label={t('userFixedEmail')}
                   />
                 </FormGroup>
@@ -297,15 +357,33 @@ const ServerPage = () => {
           </>
         )}
         <div className={classes.buttons}>
-          <Button type="button" color="primary" variant="outlined" onClick={() => navigate(-1)}>
+          <Button type="button" color="primary" variant="outlined" onClick={() => navigate(-1)}
+            sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
+            "&:hover": {
+              backgroundColor:"#F4F6F8",
+              color:"black",
+              borderColor:"black"
+            }
+            }}
+          >
             {t('sharedCancel')}
           </Button>
-          <Button type="button" color="primary" variant="contained" onClick={handleSave}>
+          <Button type="button" color="primary" variant="contained" onClick={handleSave}
+          sx={{
+            backgroundColor: "black", 
+            "&:hover": {
+              // backgroundColor: "rgba(0, 0, 0, 0.8)", 
+              backgroundColor:"black"
+            },
+            color: "white", 
+          }}
+          >
             {t('sharedSave')}
           </Button>
         </div>
       </Container>
     </PageLayout>
+    </Box>
   );
 };
 

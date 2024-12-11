@@ -192,7 +192,7 @@ const BottomMenu = () => {
           <Typography color="textPrimary">{t("settingsUser")}</Typography>
         </MenuItem>
         <MenuItem onClick={handleLogout}>
-          <Typography color="error">{t("loginLogout")}</Typography>
+          <Typography color="#1877F2">{t("loginLogout")}</Typography>
         </MenuItem>
       </Menu>
     </Paper>

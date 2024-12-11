@@ -131,13 +131,20 @@ const GroupsPage = () => {
             startIcon={<AddIcon />}
             onClick={() => navigate("/settings/group")}
             sx={{
-              padding: "10px 20px",
+              // paddingLeft: "20px",
               textTransform: "none",
               fontSize: "14px",
-              borderRadius: "8px",
+              borderRadius: "5px",
+              
+                backgroundColor: "black", 
+                "&:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                },
+                color: "white", 
+             
             }}
           >
-            {t("newGroup")} New Group
+            {t("newGroup")} NEW GROUP
           </Button>
         </Box>
         <Paper sx={{ margin: "30px", borderRadius: "10px" }}>

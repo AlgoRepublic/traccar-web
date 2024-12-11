@@ -206,8 +206,15 @@ const PreferencesPage = () => {
                       <Checkbox
                         checked={attributes.hasOwnProperty('mapGeofences') ? attributes.mapGeofences : true}
                         onChange={(e) => setAttributes({ ...attributes, mapGeofences: e.target.checked })}
+                        sx={{
+                          color: "black",
+                          "&.Mui-checked": {
+                            color: "#1877F2", 
+                          },
+                        }}
                       />
                     )}
+
                     label={t('attributeShowGeofences')}
                   />
                   <FormControlLabel
@@ -215,6 +222,12 @@ const PreferencesPage = () => {
                       <Checkbox
                         checked={attributes.hasOwnProperty('mapFollow') ? attributes.mapFollow : false}
                         onChange={(e) => setAttributes({ ...attributes, mapFollow: e.target.checked })}
+                        sx={{
+                          color: "black",
+                          "&.Mui-checked": {
+                            color: "#1877F2", 
+                          },
+                        }}
                       />
                     )}
                     label={t('deviceFollow')}
@@ -224,6 +237,12 @@ const PreferencesPage = () => {
                       <Checkbox
                         checked={attributes.hasOwnProperty('mapCluster') ? attributes.mapCluster : true}
                         onChange={(e) => setAttributes({ ...attributes, mapCluster: e.target.checked })}
+                        sx={{
+                          color: "black",
+                          "&.Mui-checked": {
+                            color: "#1877F2", 
+                          },
+                        }}
                       />
                     )}
                     label={t('mapClustering')}
@@ -233,6 +252,12 @@ const PreferencesPage = () => {
                       <Checkbox
                         checked={attributes.hasOwnProperty('mapOnSelect') ? attributes.mapOnSelect : true}
                         onChange={(e) => setAttributes({ ...attributes, mapOnSelect: e.target.checked })}
+                        sx={{
+                          color: "black",
+                          "&.Mui-checked": {
+                            color: "#1877F2", 
+                          },
+                        }}
                       />
                     )}
                     label={t('mapOnSelect')}
@@ -365,6 +390,15 @@ const PreferencesPage = () => {
                   variant="outlined"
                   color="primary"
                   onClick={() => navigate('/emulator')}
+                  sx={{
+                    color: "grey", //
+                    borderColor: "lightgrey", 
+                    "&:hover": {
+                      backgroundColor: "#F4F6F8",
+                      borderColor: "black", 
+                      color :"black",
+                    },
+                  }} 
                 >
                   {t('sharedEmulator')}
                 </Button>
@@ -373,6 +407,15 @@ const PreferencesPage = () => {
                     variant="outlined"
                     color="error"
                     onClick={handleReboot}
+                    sx={{
+                      color: "grey", //
+                      borderColor: "lightgrey", 
+                      "&:hover": {
+                        backgroundColor: "#F4F6F8",
+                        borderColor: "black", 
+                        color :"black",
+                      },
+                    }} 
                   >
                     {t('serverReboot')}
                   </Button>
@@ -385,6 +428,13 @@ const PreferencesPage = () => {
                 color="primary"
                 variant="outlined"
                 onClick={() => navigate(-1)}
+                sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
+              "&:hover": {
+                backgroundColor:"#F4F6F8",
+                color:"black",
+                borderColor:"black"
+              }
+              }}
               >
                 {t('sharedCancel')}
               </Button>
@@ -393,6 +443,14 @@ const PreferencesPage = () => {
                 color="primary"
                 variant="contained"
                 onClick={handleSave}
+                sx={{
+                  backgroundColor: "black", 
+                  "&:hover": {
+                    // backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                    backgroundColor:"black"
+                  },
+                  color: "white", 
+                }}
               >
                 {t('sharedSave')}
               </Button>
