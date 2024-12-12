@@ -31,7 +31,7 @@
 //   const [temporary, setTemporary] = useState(false);
 
 //   const handleLogin = useCatch(async (userId) => {
-//     const response = await fetch(`http://localhost:8082/api/session/${userId}`);
+//     const response = await fetch(`/api/session/${userId}`);
 //     if (response.ok) {
 //       window.location.replace('/');
 //     } else {
@@ -56,7 +56,7 @@
 //   useEffectAsync(async () => {
 //     setLoading(true);
 //     try {
-//       const response = await fetch('http://localhost:8082/api/users');
+//       const response = await fetch('/api/users');
 //       if (response.ok) {
 //         setItems(await response.json());
 //       } else {
@@ -133,7 +133,7 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Table, TableRow, TableCell, TableHead, TableBody, TablePagination, TableSortLabel, TextField, IconButton, 
-  Toolbar, Button, FormControlLabel, Switch, Box, Paper, Checkbox, Typography, Tooltip
+  Toolbar, Button, FormControlLabel, Switch, Box, Paper, Checkbox, Typography, Tooltip,MenuItem,
 } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import LinkIcon from '@mui/icons-material/Link';
@@ -148,6 +148,11 @@ import { useManager } from '../common/util/permissions';
 import SearchHeader, { filterByKeyword } from './components/SearchHeader';
 import useSettingsStyles from './common/useSettingsStyles';
 import { Add, Search } from '@mui/icons-material';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Popper from '@mui/material/Popper';
+import MenuList from '@mui/material/MenuList';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const UsersPage = () => {
   const classes = useSettingsStyles();
@@ -168,7 +173,7 @@ const UsersPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleLogin = useCatch(async (userId) => {
-    const response = await fetch(`http://localhost:8082/api/session/${userId}`);
+    const response = await fetch(`/api/session/${userId}`);
     if (response.ok) {
       window.location.replace('/');
     } else {
@@ -193,7 +198,7 @@ const UsersPage = () => {
   useEffectAsync(async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8082/api/users');
+      const response = await fetch('/api/users');
       if (response.ok) {
         setItems(await response.json());
       } else {
@@ -264,6 +269,39 @@ const UsersPage = () => {
   const handleNavigate = () => {
     navigate('/settings/user');
   };
+
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  }
+
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
 
   return (
     <Box sx={{ marginTop: "20px" }}>
@@ -349,6 +387,8 @@ const UsersPage = () => {
                 <TableCell>{t('userAdmin')}</TableCell>
                 <TableCell>{t('sharedDisabled')}</TableCell>
                 <TableCell>{t('userExpirationTime')}</TableCell>
+                <TableCell>Actions</TableCell>
+
                 <TableCell />
               </TableRow>
             </TableHead>
@@ -371,13 +411,59 @@ const UsersPage = () => {
                       <TableCell>{formatBoolean(item.disabled, t)}</TableCell>
                       <TableCell>{formatTime(item.expirationTime, 'date')}</TableCell>
                       <TableCell>
-                        <CollectionActions
+
+        <Button
+          ref={anchorRef}
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          <MoreVertIcon/>
+          
+        </Button>
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+
+          sx={{zIndex:"1"}}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                  >
+                    <MenuItem onClick={handleClose}>
+                    <CollectionActions
                           itemId={item.id}
                           editPath="/settings/user"
                           endpoint="users"
                           setTimestamp={setTimestamp}
                           customActions={manager ? [actionLogin, actionConnections] : [actionConnections]}
                         />
+                    </MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
                       </TableCell>
                     </TableRow>
                   );

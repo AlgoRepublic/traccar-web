@@ -42,7 +42,7 @@ const AccumulatorsPage = () => {
   }, [deviceId, position]);
 
   const handleSave = useCatch(async () => {
-    const response = await fetch(`http://localhost:8082/api/devices/${deviceId}/accumulators`, {
+    const response = await fetch(`/api/devices/${deviceId}/accumulators`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item),
@@ -58,7 +58,7 @@ const AccumulatorsPage = () => {
   return (
     <PageLayout menu={<SettingsMenu />} breadcrumbs={['sharedDeviceAccumulators']}>
       {item && (
-        <Container maxWidth="xs" className={classes.container}>
+        <Container maxWidth="md" className={classes.container}>
           <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="subtitle1">
@@ -86,6 +86,13 @@ const AccumulatorsPage = () => {
               color="primary"
               variant="outlined"
               onClick={() => navigate(-1)}
+              sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
+              "&:hover": {
+                backgroundColor:"#F4F6F8",
+                color:"black",
+                borderColor:"black"
+              }
+              }}
             >
               {t('sharedCancel')}
             </Button>
@@ -94,6 +101,14 @@ const AccumulatorsPage = () => {
               color="primary"
               variant="contained"
               onClick={handleSave}
+              sx={{
+                backgroundColor: "black", 
+                "&:hover": {
+                  // backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                  backgroundColor:"black"
+                },
+                color: "white", 
+              }}
             >
               {t('sharedSave')}
             </Button>

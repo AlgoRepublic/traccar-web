@@ -36,7 +36,7 @@ const CommandDevicePage = () => {
 
   const handleSend = useCatch(async () => {
     const query = new URLSearchParams({ groupId: id });
-    const response = await fetch(`http://localhost:8082/api/commands/send?${query.toString()}`, {
+    const response = await fetch(`/api/commands/send?${query.toString()}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item),
@@ -84,6 +84,14 @@ const CommandDevicePage = () => {
             color="primary"
             variant="outlined"
             onClick={() => navigate(-1)}
+            sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
+            "&:hover": {
+              backgroundColor:"#F4F6F8",
+              color:"black",
+              borderColor:"black"
+            }
+            }}
+            
           >
             {t('sharedCancel')}
           </Button>
@@ -92,6 +100,14 @@ const CommandDevicePage = () => {
             color="primary"
             variant="contained"
             onClick={handleSend}
+            sx={{
+              backgroundColor: "black", 
+              "&:hover": {
+                // backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                backgroundColor:"black"
+              },
+              color: "white", 
+            }}
             disabled={!item.attributes.data}
           >
             {t('commandSend')}

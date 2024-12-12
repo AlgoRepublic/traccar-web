@@ -34,7 +34,7 @@ const NotificationPage = () => {
 
   const testNotificators = useCatch(async () => {
     await Promise.all(item.notificators.split(/[, ]+/).map(async (notificator) => {
-      const response = await fetch(`http://localhost:8082/api/notifications/test/${notificator}`, {
+      const response = await fetch(`/api/notifications/test/${notificator}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(item),
@@ -103,14 +103,14 @@ const NotificationPage = () => {
                   label={t('sharedSavedCommand')}
                 />
               )}
-              <Button
+               <Button
                 variant="outlined"
                 color="primary"
                 onClick={testNotificators}
                 disabled={!item.notificators}
               >
                 {t('sharedTestNotificators')}
-              </Button>
+              </Button> 
               <FormGroup>
                 <FormControlLabel
                   control={(
@@ -118,7 +118,6 @@ const NotificationPage = () => {
                       checked={item.always}
                       onChange={(e) => setItem({ ...item, always: e.target.checked })}
                       sx={{
-                        color: "black",
                         "&.Mui-checked": {
                           color: "#1877F2", 
                         },

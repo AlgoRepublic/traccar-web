@@ -135,7 +135,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
 
   const handleRemove = useCatch(async (removed) => {
     if (removed) {
-      const response = await fetch('http://localhost:8082/api/devices');
+      const response = await fetch('/api/devices');
       if (response.ok) {
         dispatch(devicesActions.refresh(await response.json()));
       } else {
@@ -150,14 +150,14 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
       name: t('sharedGeofence'),
       area: `CIRCLE (${position.latitude} ${position.longitude}, 50)`,
     };
-    const response = await fetch('http://localhost:8082/api/geofences', {
+    const response = await fetch('/api/geofences', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newItem),
     });
     if (response.ok) {
       const item = await response.json();
-      const permissionResponse = await fetch('http://localhost:8082/api/permissions', {
+      const permissionResponse = await fetch('/api/permissions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ deviceId: position.deviceId, geofenceId: item.id }),

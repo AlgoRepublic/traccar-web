@@ -37,7 +37,7 @@ const App = () => {
 	const user = useSelector(state => state.session.user);
 
 	const acceptTerms = useCatch(async () => {
-		const response = await fetch(`http://localhost:8082/api/users/${user.id}`, {
+		const response = await fetch(`/api/users/${user.id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -54,7 +54,7 @@ const App = () => {
 
 	useEffectAsync(async () => {
 		if (!user) {
-			const response = await fetch('http://localhost:8082/api/session');
+			const response = await fetch('/api/session');
 			if (response.ok) {
 				dispatch(sessionActions.updateUser(await response.json()));
 			} else if (newServer) {

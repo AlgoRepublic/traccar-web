@@ -20,7 +20,7 @@ const EditItemView = ({
   useEffectAsync(async () => {
     if (!item) {
       if (id) {
-        const response = await fetch(`http://localhost:8082/api/${endpoint}/${id}`);
+        const response = await fetch(`/api/${endpoint}/${id}`);
         if (response.ok) {
           setItem(await response.json());
         } else {

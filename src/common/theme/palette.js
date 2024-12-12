@@ -5,6 +5,9 @@ import {
 	lightGreen,
 	deepOrange,
 	blueGrey,
+	red,
+	blue,
+	//#1877F2
 } from '@mui/material/colors';
 const validatedColor = (color) =>
 	/^#([0-9A-Fa-f]{3}){1,2}$/.test(color) ? color : null;
@@ -17,7 +20,7 @@ export default (server, darkMode) => ({
 	primary: {
 		main:
 			validatedColor(server?.attributes?.colorPrimary) ||
-			(darkMode ? deepOrange[200] : deepOrange[900]),
+			(darkMode ? deepOrange[200] : '#1877F2'),
 	},
 	secondary: {
 		main:

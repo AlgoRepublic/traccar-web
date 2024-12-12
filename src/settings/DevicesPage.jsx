@@ -38,7 +38,7 @@
 //     setLoading(true);
 //     try {
 //       const query = new URLSearchParams({ all: showAll });
-//       const response = await fetch(`http://localhost:8082/api/devices?${query.toString()}`);
+//       const response = await fetch(`/api/devices?${query.toString()}`);
 //       if (response.ok) {
 //         setItems(await response.json());
 //       } else {
@@ -163,6 +163,7 @@ import {
   Tooltip,
   TextField,
   Menu,
+  MenuItem,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -181,7 +182,11 @@ import { useDeviceReadonly, useManager } from "../common/util/permissions";
 import useSettingsStyles from "./common/useSettingsStyles";
 import DeviceUsersValue from "./components/DeviceUsersValue";
 import { Add, Search } from "@mui/icons-material";
-
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Popper from '@mui/material/Popper';
+import MenuList from '@mui/material/MenuList';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 const DevicesPage = () => {
   const classes = useSettingsStyles();
   const navigate = useNavigate();
@@ -202,12 +207,14 @@ const DevicesPage = () => {
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const [menuState, setMenuState] = useState(false); 
+
 
   useEffectAsync(async () => {
     setLoading(true);
     try {
       const query = new URLSearchParams({ all: showAll });
-      const response = await fetch(`http://localhost:8082/api/devices?${query.toString()}`);
+      const response = await fetch(`/api/devices?${query.toString()}`);
       if (response.ok) {
         setItems(await response.json());
       } else {
@@ -280,10 +287,11 @@ const DevicesPage = () => {
     { id: "model", label: t("deviceModel"), numeric: false },
     { id: "contact", label: t("deviceContact"), numeric: false },
     { id: "expirationTime", label: t("userExpirationTime"), numeric: false },
-    { id: "action", label: "Actions", numeric: false },
     ...(manager
       ? [{ id: "users", label: t("settingsUsers"), numeric: false }]
       : []),
+    { id: "action", label: "Actions", numeric: false },
+    
   ];
 
   const sortedItems = useMemo(
@@ -312,6 +320,44 @@ const DevicesPage = () => {
 navigate('/settings/device')
   }
 
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
+
+
+
+
   return (
     <Box sx={{ marginTop: "20px" }}>
       <PageLayout
@@ -320,7 +366,7 @@ navigate('/settings/device')
       >
         <SearchHeader keyword={searchKeyword} setKeyword={setSearchKeyword} />
 
-        <Box m="30px" display="flex" alignItems="center" mb={5}>
+        <Box m="30px 30px 0px 30px" display="flex" alignItems="center" mb={0}>
           <Typography variant="h5" sx={{ flex: 1 }} >
             {t("deviceTitle")}
           </Typography>
@@ -365,17 +411,6 @@ navigate('/settings/device')
                     </IconButton>
                   ),
                 }}
-                sx={{
-                  flex: 1,
-                  maxWidth: "400px",
-                  backgroundColor: "white",
-                  padding:'10px',
-                  borderRadius: "8px",
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'white', 
-                  },
-                
-                }}
               />
             </Box>
             {selected.length > 0 ? (
@@ -390,9 +425,9 @@ navigate('/settings/device')
               </Tooltip>
             ) : (
               <Tooltip title={t("filter")}>
-                <IconButton>
+                 <IconButton>
                   <FilterListIcon />
-                </IconButton>
+                </IconButton> 
               </Tooltip>
             )}
           </Toolbar>
@@ -414,6 +449,11 @@ navigate('/settings/device')
                         items.length > 0 && selected.length === items.length
                       }
                       onChange={handleSelectAllClick}
+                      sx={{
+                        '&.Mui-checked': {
+                          color: '#1877F2',
+                        },
+                      }}
                     />
                   </TableCell>
                   {headCells.map((cell) => (
@@ -447,7 +487,13 @@ navigate('/settings/device')
                         selected={isSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isSelected} />
+                          <Checkbox checked={isSelected}
+                           sx={{
+        '&.Mui-checked': {
+          color: selected ? '#1877F2' : 'default',  
+        },
+      }}
+      />
                         </TableCell>
                         <TableCell>{item.name}</TableCell>
                         <TableCell>{item.uniqueId}</TableCell>
@@ -466,6 +512,92 @@ navigate('/settings/device')
                           </TableCell>
                         )}
                         <TableCell>
+
+
+
+
+
+                        
+      {/* <Paper>
+        <MenuList>
+          <MenuItem>Profile</MenuItem>
+          <MenuItem>My account</MenuItem>
+          <MenuItem>Logout</MenuItem>
+        </MenuList>
+      </Paper> */}
+    
+        <Button
+          ref={anchorRef}
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          <MoreVertIcon/>
+          
+        </Button>
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+
+          sx={{zIndex:"1"}}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <CollectionActions
+                            itemId={item.id}
+                            editPath="/settings/device"
+                            endpoint="devices"
+                            setTimestamp={setTimestamp}
+                            customActions={[actionConnections]}
+                            readonly={deviceReadonly}
+                          />
+
+
+                    </MenuItem>
+                    {/* <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <MenuItem onClick={handleClose}>Logout</MenuItem> */}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          
                         {/* <Menu
               id="action-menu"
               anchorEl={menuState.anchorEl}
@@ -482,14 +614,8 @@ navigate('/settings/device')
                 <LinkIcon sx={{ marginRight: "8px" }} /> Connections
               </MenuItem>
             </Menu> */}
-                          <CollectionActions
-                            itemId={item.id}
-                            editPath="/settings/device"
-                            endpoint="devices"
-                            setTimestamp={setTimestamp}
-                            customActions={[actionConnections]}
-                            readonly={deviceReadonly}
-                          />
+            
+                          
                         </TableCell>
                       </TableRow>
                     );
@@ -518,13 +644,7 @@ navigate('/settings/device')
           }}
         >
           <Box>
-            <Button variant="outlined" onClick={handleExport} sx={{borderColor:"black", color:"black",
-          "&:hover": {
-            backgroundColor:"#F6F7F9",
-            color:"black",
-            borderColor:"black"
-          }
-          }}>
+            <Button variant="outlined" onClick={handleExport}>
               {t("reportExport")}
             </Button>
           </Box>

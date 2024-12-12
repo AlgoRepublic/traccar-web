@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Box,
   IconButton, Menu, MenuItem, useMediaQuery, useTheme,
 } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
@@ -74,35 +75,45 @@ const CollectionActions = ({
           </Menu>
         </>
       ) : (
-        <div className={classes.row}>
+        <Box sx={{zIndex:"1"}}>
           {customActions && customActions.map((action) => (
+            
             <Tooltip title={action.title} key={action.key}>
+              
               <IconButton sx={{
-                color: 'green'
+                color: 'green',
+                display:"block",
               }} size="small" onClick={() => handleCustom(action)}>
-                {action.icon}
+                <span style={{marginRight:"5px", fontSize:"0.25rem"}}> {action.icon}</span> <span style={{fontSize:"14px"}}>{action.title}</span> 
               </IconButton>
+             
             </Tooltip>
+            
+            
           ))}
+      
           {!readonly && (
             <>
               <Tooltip title={t('sharedEdit')}>
                 <IconButton size="small" onClick={handleEdit}>
                   <EditIcon sx={{
-                    color: 'blue'
-                  }} fontSize="small" />
+                    color: '#000',
+                    marginRight:"5px"
+                  }} fontSize="small" /> <span style={{fontSize:"14px"}}>Edit</span> 
                 </IconButton>
               </Tooltip>
+              <br/>
               <Tooltip title={t('sharedRemove')}>
-                <IconButton size="small" onClick={handleRemove}>
+                <IconButton size="small" onClick={handleRemove}> 
                   <DeleteIcon sx={{
-                    color: 'red'
-                  }} fontSize="small" />
+                    color: 'red',
+                    marginRight:"5px"
+                  }} fontSize="small" /> <span style={{fontSize:"14px"}}>Delete</span>
                 </IconButton>
               </Tooltip>
             </>
           )}
-        </div>
+        </Box>
       )}
       <RemoveDialog style={{ transform: 'none' }} open={removing} endpoint={endpoint} itemId={itemId} onResult={handleRemoveResult} />
     </>

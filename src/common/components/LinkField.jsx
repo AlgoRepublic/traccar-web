@@ -52,14 +52,14 @@ const LinkField = ({
     if (!newValue.find((it) => it < 0)) {
       const results = [];
       newValue.filter((it) => !oldValue.includes(it)).forEach((added) => {
-        results.push(fetch('http://localhost:8082/api/permissions', {
+        results.push(fetch('/api/permissions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(createBody(added)),
         }));
       });
       oldValue.filter((it) => !newValue.includes(it)).forEach((removed) => {
-        results.push(fetch('http://localhost:8082/api/permissions', {
+        results.push(fetch('/api/permissions', {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(createBody(removed)),

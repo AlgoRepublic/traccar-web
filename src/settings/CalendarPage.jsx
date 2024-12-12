@@ -88,7 +88,7 @@ const CalendarPage = () => {
   };
 
   const onItemSaved = useCatch(async () => {
-    const response = await fetch('http://localhost:8082/api/calendars');
+    const response = await fetch('/api/calendars');
     if (response.ok) {
       dispatch(calendarsActions.refresh(await response.json()));
     } else {

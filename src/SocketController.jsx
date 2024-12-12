@@ -45,11 +45,11 @@ const SocketController = () => {
       dispatch(sessionActions.updateSocket(false));
       if (event.code !== logoutCode) {
         try {
-          const devicesResponse = await fetch('http://localhost:8082/api/devices');
+          const devicesResponse = await fetch('/api/devices');
           if (devicesResponse.ok) {
             dispatch(devicesActions.update(await devicesResponse.json()));
           }
-          const positionsResponse = await fetch('http://localhost:8082/api/positions');
+          const positionsResponse = await fetch('/api/positions');
           if (positionsResponse.ok) {
             dispatch(sessionActions.updatePositions(await positionsResponse.json()));
           }
@@ -89,7 +89,7 @@ const SocketController = () => {
 
   useEffectAsync(async () => {
     if (authenticated) {
-      const response = await fetch('http://localhost:8082/api/devices');
+      const response = await fetch('/api/devices');
       if (response.ok) {
         dispatch(devicesActions.refresh(await response.json()));
       } else {

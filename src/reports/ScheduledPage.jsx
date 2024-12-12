@@ -33,7 +33,7 @@ const ScheduledPage = () => {
   useEffectAsync(async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8082/api/reports');
+      const response = await fetch('/api/reports');
       if (response.ok) {
         setItems(await response.json());
       } else {

@@ -68,6 +68,8 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
   const devicePrimary = useAttributePreference('devicePrimary', 'name');
   const deviceSecondary = useAttributePreference('deviceSecondary', '');
 
+
+
   const secondaryText = () => {
     let status;
     if (item.status === 'online' || !item.lastUpdate) {
@@ -92,8 +94,8 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
           // py: 1.5,
           gap: 2,
           pr: 1.5,
-          m:1.3,
-          borderRadius: '6px',
+          // m:1.3,
+          borderRadius: '10px',
           fontSize: '14px',
           fontWeight: 600,
           lineHeight: 1.5,
@@ -113,6 +115,7 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
         onClick={() => dispatch(devicesActions.selectId(item.id))}
         disabled={!admin && item.disabled}
       >
+  
         <ListItemAvatar>
           <Avatar>
             <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />

@@ -68,7 +68,7 @@ const UserPage = () => {
   const handleDelete = useCatch(async () => {
     if (deleteEmail === currentUser.email) {
       setDeleteFailed(false);
-      const response = await fetch(`http://localhost:8082/api/users/${currentUser.id}`, { method: 'DELETE' });
+      const response = await fetch(`/api/users/${currentUser.id}`, { method: 'DELETE' });
       if (response.ok) {
         navigate('/login');
         dispatch(sessionActions.updateUser(null));
@@ -81,7 +81,7 @@ const UserPage = () => {
   });
 
   const handleGenerateTotp = useCatch(async () => {
-    const response = await fetch('http://localhost:8082/api/users/totp', { method: 'POST' });
+    const response = await fetch('/api/users/totp', { method: 'POST' });
     if (response.ok) {
       setItem({ ...item, totpKey: await response.text() });
     } else {
@@ -356,13 +356,13 @@ const UserPage = () => {
 
                   },
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "red !important", // Adjust border color if needed
+                    borderColor: "red !important", 
                   },
                   "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(0, 0, 0, 0.87)", // Hover effect
+                    borderColor: "rgba(0, 0, 0, 0.87)", 
                   },
                   "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#3f51b5 !important", // Focused border color
+                    borderColor: "#3f51b5 !important", 
                   },
                 }}
               />

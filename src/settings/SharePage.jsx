@@ -32,7 +32,7 @@ const SharePage = () => {
 
   const handleShare = useCatchCallback(async () => {
     const expirationTime = dayjs(expiration).toISOString();
-    const response = await fetch('http://localhost:8082/api/devices/share', {
+    const response = await fetch('/api/devices/share', {
       method: 'POST',
       body: new URLSearchParams(`deviceId=${id}&expiration=${expirationTime}`),
     });

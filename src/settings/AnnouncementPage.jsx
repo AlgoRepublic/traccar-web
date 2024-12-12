@@ -31,7 +31,7 @@ const AnnouncementPage = () => {
   const handleSend = useCatchCallback(async () => {
     const query = new URLSearchParams();
     users.forEach((userId) => query.append('userId', userId));
-    const response = await fetch(`http://localhost:8082/api/notifications/send/${notificator}?${query.toString()}`, {
+    const response = await fetch(`/api/notifications/send/${notificator}?${query.toString()}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(message),
@@ -87,13 +87,6 @@ const AnnouncementPage = () => {
             color="primary"
             variant="outlined"
             onClick={() => navigate(-1)}
-            sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
-              "&:hover": {
-                backgroundColor:"#F4F6F8",
-                color:"black",
-                borderColor:"black"
-              }
-              }}
           >
             {t('sharedCancel')}
           </Button>
@@ -102,14 +95,6 @@ const AnnouncementPage = () => {
             color="primary"
             variant="contained"
             onClick={handleSend}
-            sx={{
-              backgroundColor: "black", 
-              "&:hover": {
-                // backgroundColor: "rgba(0, 0, 0, 0.8)", 
-                backgroundColor:"black"
-              },
-              color: "white", 
-            }}
             disabled={!notificator || !message.subject || !message.body}
           >
             {t('commandSend')}

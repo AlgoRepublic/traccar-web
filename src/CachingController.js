@@ -11,7 +11,7 @@ const CachingController = () => {
 
   useEffectAsync(async () => {
     if (authenticated) {
-      const response = await fetch('http://localhost:8082/api/geofences');
+      const response = await fetch('/api/geofences');
       if (response.ok) {
         dispatch(geofencesActions.refresh(await response.json()));
       } else {
@@ -22,7 +22,7 @@ const CachingController = () => {
 
   useEffectAsync(async () => {
     if (authenticated) {
-      const response = await fetch('http://localhost:8082/api/groups');
+      const response = await fetch('/api/groups');
       if (response.ok) {
         dispatch(groupsActions.refresh(await response.json()));
       } else {
@@ -33,7 +33,7 @@ const CachingController = () => {
 
   useEffectAsync(async () => {
     if (authenticated) {
-      const response = await fetch('http://localhost:8082/api/drivers');
+      const response = await fetch('/api/drivers');
       if (response.ok) {
         dispatch(driversActions.refresh(await response.json()));
       } else {
@@ -44,7 +44,7 @@ const CachingController = () => {
 
   useEffectAsync(async () => {
     if (authenticated) {
-      const response = await fetch('http://localhost:8082/api/maintenance');
+      const response = await fetch('/api/maintenance');
       if (response.ok) {
         dispatch(maintenancesActions.refresh(await response.json()));
       } else {
@@ -55,7 +55,7 @@ const CachingController = () => {
 
   useEffectAsync(async () => {
     if (authenticated) {
-      const response = await fetch('http://localhost:8082/api/calendars');
+      const response = await fetch('/api/calendars');
       if (response.ok) {
         dispatch(calendarsActions.refresh(await response.json()));
       } else {

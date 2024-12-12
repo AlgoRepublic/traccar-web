@@ -49,7 +49,7 @@ const StatisticsPage = () => {
     setLoading(true);
     try {
       const query = new URLSearchParams({ from, to });
-      const response = await fetch(`http://localhost:8082/api/statistics?${query.toString()}`);
+      const response = await fetch(`/api/statistics?${query.toString()}`);
       if (response.ok) {
         setItems(await response.json());
       } else {

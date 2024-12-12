@@ -137,7 +137,7 @@ const ReplayPage = () => {
     setFrom(from);
     setTo(to);
     const query = new URLSearchParams({ deviceId, from, to });
-    const response = await fetch(`http://localhost:8082/api/positions?${query.toString()}`);
+    const response = await fetch(`/api/positions?${query.toString()}`);
     if (response.ok) {
       setIndex(0);
       const positions = await response.json();

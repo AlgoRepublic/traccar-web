@@ -52,7 +52,7 @@ const ServerPage = () => {
   const handleFiles = useCatch(async (files) => {
     if (files.length > 0) {
       const file = files[0];
-      const response = await fetch(`http://localhost:8082/api/server/file/${file.path}`, {
+      const response = await fetch(`/api/server/file/${file.path}`, {
         method: 'POST',
         body: file,
       });
@@ -63,7 +63,7 @@ const ServerPage = () => {
   });
 
   const handleSave = useCatch(async () => {
-    const response = await fetch('http://localhost:8082/api/server', {
+    const response = await fetch('/api/server', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item),
@@ -195,7 +195,6 @@ const ServerPage = () => {
                   <FormControlLabel
                     control={<Checkbox checked={item.forceSettings} onChange={(event) => setItem({ ...item, forceSettings: event.target.checked })}
                     sx={{
-                      color: "black",
                       "&.Mui-checked": {
                         color: "#1877F2", 
                       },
@@ -268,7 +267,6 @@ const ServerPage = () => {
                   <FormControlLabel
                     control={<Checkbox checked={item.registration} onChange={(event) => setItem({ ...item, registration: event.target.checked })}
                     sx={{
-                      color: "black",
                       "&.Mui-checked": {
                         color: "#1877F2", 
                       },
@@ -279,7 +277,6 @@ const ServerPage = () => {
                   <FormControlLabel
                     control={<Checkbox checked={item.readonly} onChange={(event) => setItem({ ...item, readonly: event.target.checked })}
                     sx={{
-                      color: "black",
                       "&.Mui-checked": {
                         color: "#1877F2", 
                       },
@@ -290,7 +287,6 @@ const ServerPage = () => {
                   <FormControlLabel
                     control={<Checkbox checked={item.deviceReadonly} onChange={(event) => setItem({ ...item, deviceReadonly: event.target.checked })}
                     sx={{
-                      color: "black",
                       "&.Mui-checked": {
                         color: "#1877F2", 
                       },
@@ -301,7 +297,6 @@ const ServerPage = () => {
                   <FormControlLabel
                     control={<Checkbox checked={item.limitCommands} onChange={(event) => setItem({ ...item, limitCommands: event.target.checked })}
                     sx={{
-                      color: "black",
                       "&.Mui-checked": {
                         color: "#1877F2", 
                       },
@@ -312,7 +307,6 @@ const ServerPage = () => {
                   <FormControlLabel
                     control={<Checkbox checked={item.disableReports} onChange={(event) => setItem({ ...item, disableReports: event.target.checked })}
                     sx={{
-                      color: "black",
                       "&.Mui-checked": {
                         color: "#1877F2", 
                       },
@@ -323,7 +317,6 @@ const ServerPage = () => {
                   <FormControlLabel
                     control={<Checkbox checked={item.fixedEmail} onChange={(e) => setItem({ ...item, fixedEmail: e.target.checked })}
                     sx={{
-                      color: "black",
                       "&.Mui-checked": {
                         color: "#1877F2", 
                       },
@@ -358,25 +351,17 @@ const ServerPage = () => {
         )}
         <div className={classes.buttons}>
           <Button type="button" color="primary" variant="outlined" onClick={() => navigate(-1)}
-            sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
-            "&:hover": {
-              backgroundColor:"#F4F6F8",
-              color:"black",
-              borderColor:"black"
-            }
-            }}
+            // sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
+            // "&:hover": {
+            //   backgroundColor:"#F4F6F8",
+            //   color:"black",
+            //   borderColor:"black"
+            // }
+            // }}
           >
             {t('sharedCancel')}
           </Button>
           <Button type="button" color="primary" variant="contained" onClick={handleSave}
-          sx={{
-            backgroundColor: "black", 
-            "&:hover": {
-              // backgroundColor: "rgba(0, 0, 0, 0.8)", 
-              backgroundColor:"black"
-            },
-            color: "white", 
-          }}
           >
             {t('sharedSave')}
           </Button>

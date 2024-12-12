@@ -247,6 +247,11 @@ const MainToolbar = ({
             <FormControlLabel
               control={
                 <Checkbox
+                sx={{
+                  "&.Mui-checked": {
+                    color: "#1877F2", 
+                  },
+                }}
                   checked={filterMap}
                   onChange={(e) => setFilterMap(e.target.checked)}
                 />

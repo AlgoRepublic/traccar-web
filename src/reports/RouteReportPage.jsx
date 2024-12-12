@@ -69,7 +69,7 @@ const RouteReportPage = () => {
     } else {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:8082/api/reports/route?${query.toString()}`, {
+        const response = await fetch(`/api/reports/route?${query.toString()}`, {
           headers: { Accept: "application/json" },
         });
         if (response.ok) {

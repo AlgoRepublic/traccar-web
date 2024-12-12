@@ -31,6 +31,8 @@ import CollectionActions from "./components/CollectionActions";
 import TableShimmer from "../common/components/TableShimmer";
 import { filterByKeyword } from "./components/SearchHeader";
 import useSettingsStyles from "./common/useSettingsStyles";
+import FilterListIcon from "@mui/icons-material/FilterList";
+
 
 const GroupsPage = () => {
   const classes = useSettingsStyles();
@@ -149,6 +151,7 @@ const GroupsPage = () => {
         </Box>
         <Paper sx={{ margin: "30px", borderRadius: "10px" }}>
           <Toolbar sx={{ padding: "10px", display: "flex", justifyContent: "space-between" }}>
+            <Box>
             <TextField
               variant="outlined"
               placeholder="Search Group ..."
@@ -173,6 +176,24 @@ const GroupsPage = () => {
                 borderRadius: "8px",
               }}
             />
+            </Box>
+            {selected.length > 0 ? (
+              <Tooltip title={t("delete")}>
+                <IconButton>
+                  <DeleteIcon
+                    sx={{
+                      color: "red",
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title={t("filter")}>
+                 <IconButton>
+                  <FilterListIcon />
+                </IconButton> 
+              </Tooltip>
+            )}
           </Toolbar>
           <TableContainer>
             <Table>

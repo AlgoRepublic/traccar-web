@@ -16,7 +16,7 @@ const officialServers = [
   'https://demo3.traccar.org',
   'https://demo4.traccar.org',
   'https://server.traccar.org',
-  'http://localhost:8082',
+  '',
   'http://localhost:3000',
 ];
 

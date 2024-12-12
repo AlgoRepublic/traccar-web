@@ -33,7 +33,7 @@ const CommandDevicePage = () => {
   const handleSend = useCatch(async () => {
     let command;
     if (savedId) {
-      const response = await fetch(`http://localhost:8082/api/commands/${savedId}`);
+      const response = await fetch(`/api/commands/${savedId}`);
       if (response.ok) {
         command = await response.json();
       } else {
@@ -45,7 +45,7 @@ const CommandDevicePage = () => {
 
     command.deviceId = parseInt(id, 10);
 
-    const response = await fetch('http://localhost:8082/api/commands/send', {
+    const response = await fetch('/api/commands/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(command),
@@ -90,6 +90,13 @@ const CommandDevicePage = () => {
             color="primary"
             variant="outlined"
             onClick={() => navigate(-1)}
+            sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
+            "&:hover": {
+              backgroundColor:"#F4F6F8",
+              color:"black",
+              borderColor:"black"
+            }
+            }}
           >
             {t('sharedCancel')}
           </Button>
@@ -99,6 +106,14 @@ const CommandDevicePage = () => {
             variant="contained"
             onClick={handleSend}
             disabled={!validate()}
+            sx={{
+              backgroundColor: "black", 
+              "&:hover": {
+                // backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                backgroundColor:"black"
+              },
+              color: "white", 
+            }}
           >
             {t('commandSend')}
           </Button>

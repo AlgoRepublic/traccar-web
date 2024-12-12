@@ -57,7 +57,7 @@ const PreferencesPage = () => {
 
   const generateToken = useCatch(async () => {
     const expiration = dayjs(tokenExpiration, 'YYYY-MM-DD').toISOString();
-    const response = await fetch('http://localhost:8082/api/session/token', {
+    const response = await fetch('/api/session/token', {
       method: 'POST',
       body: new URLSearchParams(`expiration=${expiration}`),
     });
@@ -74,7 +74,7 @@ const PreferencesPage = () => {
   }));
 
   const handleSave = useCatch(async () => {
-    const response = await fetch(`http://localhost:8082/api/users/${user.id}`, {
+    const response = await fetch(`/api/users/${user.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...user, attributes }),
@@ -88,7 +88,7 @@ const PreferencesPage = () => {
   });
 
   const handleReboot = useCatch(async () => {
-    const response = await fetch('http://localhost:8082/api/server/reboot', { method: 'POST' });
+    const response = await fetch('/api/server/reboot', { method: 'POST' });
     throw Error(response.statusText);
   });
 
@@ -207,7 +207,6 @@ const PreferencesPage = () => {
                         checked={attributes.hasOwnProperty('mapGeofences') ? attributes.mapGeofences : true}
                         onChange={(e) => setAttributes({ ...attributes, mapGeofences: e.target.checked })}
                         sx={{
-                          color: "black",
                           "&.Mui-checked": {
                             color: "#1877F2", 
                           },
@@ -223,7 +222,6 @@ const PreferencesPage = () => {
                         checked={attributes.hasOwnProperty('mapFollow') ? attributes.mapFollow : false}
                         onChange={(e) => setAttributes({ ...attributes, mapFollow: e.target.checked })}
                         sx={{
-                          color: "black",
                           "&.Mui-checked": {
                             color: "#1877F2", 
                           },
@@ -238,7 +236,6 @@ const PreferencesPage = () => {
                         checked={attributes.hasOwnProperty('mapCluster') ? attributes.mapCluster : true}
                         onChange={(e) => setAttributes({ ...attributes, mapCluster: e.target.checked })}
                         sx={{
-                          color: "black",
                           "&.Mui-checked": {
                             color: "#1877F2", 
                           },
@@ -253,7 +250,6 @@ const PreferencesPage = () => {
                         checked={attributes.hasOwnProperty('mapOnSelect') ? attributes.mapOnSelect : true}
                         onChange={(e) => setAttributes({ ...attributes, mapOnSelect: e.target.checked })}
                         sx={{
-                          color: "black",
                           "&.Mui-checked": {
                             color: "#1877F2", 
                           },
@@ -390,15 +386,6 @@ const PreferencesPage = () => {
                   variant="outlined"
                   color="primary"
                   onClick={() => navigate('/emulator')}
-                  sx={{
-                    color: "grey", //
-                    borderColor: "lightgrey", 
-                    "&:hover": {
-                      backgroundColor: "#F4F6F8",
-                      borderColor: "black", 
-                      color :"black",
-                    },
-                  }} 
                 >
                   {t('sharedEmulator')}
                 </Button>
@@ -407,15 +394,6 @@ const PreferencesPage = () => {
                     variant="outlined"
                     color="error"
                     onClick={handleReboot}
-                    sx={{
-                      color: "grey", //
-                      borderColor: "lightgrey", 
-                      "&:hover": {
-                        backgroundColor: "#F4F6F8",
-                        borderColor: "black", 
-                        color :"black",
-                      },
-                    }} 
                   >
                     {t('serverReboot')}
                   </Button>
@@ -428,13 +406,6 @@ const PreferencesPage = () => {
                 color="primary"
                 variant="outlined"
                 onClick={() => navigate(-1)}
-                sx={{backgroundColor:"outline", color:"black" , borderColor:"black",
-              "&:hover": {
-                backgroundColor:"#F4F6F8",
-                color:"black",
-                borderColor:"black"
-              }
-              }}
               >
                 {t('sharedCancel')}
               </Button>
@@ -443,14 +414,6 @@ const PreferencesPage = () => {
                 color="primary"
                 variant="contained"
                 onClick={handleSave}
-                sx={{
-                  backgroundColor: "black", 
-                  "&:hover": {
-                    // backgroundColor: "rgba(0, 0, 0, 0.8)", 
-                    backgroundColor:"black"
-                  },
-                  color: "white", 
-                }}
               >
                 {t('sharedSave')}
               </Button>

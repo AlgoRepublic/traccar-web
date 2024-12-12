@@ -56,14 +56,14 @@ const StopReportPage = () => {
     if (type === 'export') {
       window.location.assign(`/api/reports/stops/xlsx?${query.toString()}`);
     } else if (type === 'mail') {
-      const response = await fetch(`http://localhost:8082/api/reports/stops/mail?${query.toString()}`);
+      const response = await fetch(`/api/reports/stops/mail?${query.toString()}`);
       if (!response.ok) {
         throw Error(await response.text());
       }
     } else {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:8082/api/reports/stops?${query.toString()}`, {
+        const response = await fetch(`/api/reports/stops?${query.toString()}`, {
           headers: { Accept: 'application/json' },
         });
         if (response.ok) {
