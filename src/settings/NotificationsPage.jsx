@@ -157,7 +157,7 @@ const NotificationsPage = () => {
         menu={<SettingsMenu />}
         breadcrumbs={["settingsTitle", "sharedNotifications"]}
       >
-        <Box m="30px" display="flex" alignItems="center" mb={5}>
+         <Box m="30px 30px 0px 30px" display="flex" alignItems="center" mb={0}>
           <Typography variant="h5" sx={{ flex: 1 }}>
             {t("sharedNotifications")}
           </Typography>

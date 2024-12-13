@@ -207,7 +207,6 @@ const DevicesPage = () => {
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  // const [menuState, setMenuState] = useState(false); 
 
 
   useEffectAsync(async () => {
@@ -512,29 +511,19 @@ navigate('/settings/device')
                           </TableCell>
                         )}
                         <TableCell>
-
-
-
-
-
-                        
-      {/* <Paper>
-        <MenuList>
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>My account</MenuItem>
-          <MenuItem>Logout</MenuItem>
-        </MenuList>
-      </Paper> */}
-    
         <Button
           ref={anchorRef}
           id="composition-button"
           aria-controls={open ? 'composition-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup="true"
-          onClick={handleToggle}
+          // onClick={handleToggle}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevents row selection
+            handleToggle();
+          }}
         >
-          <MoreVertIcon/>
+          <MoreVertIcon sx={{color:"black"}}/>
           
         </Button>
         <Popper
@@ -562,8 +551,15 @@ navigate('/settings/device')
                     id="composition-menu"
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <MenuItem onClick={handleClose}>
+                    {/* <MenuItem onClick={handleClose}> */}
+                    <MenuItem
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent row selection
+                            handleClose();
+                          }}
+                        >
                       <CollectionActions
                             itemId={item.id}
                             editPath="/settings/device"
@@ -583,39 +579,6 @@ navigate('/settings/device')
             </Grow>
           )}
         </Popper>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-                          
-                        {/* <Menu
-              id="action-menu"
-              anchorEl={menuState.anchorEl}
-              open={menuState.id === item.id}
-              onClose={handleMenuClose}
-            >
-              <MenuItem onClick={() => navigate(`/settings/device/${item.id}/edit`)}>
-                <EditIcon sx={{ marginRight: "8px" }} /> Edit
-              </MenuItem>
-              <MenuItem onClick={() => handleDelete(item.id)}>
-                <DeleteIcon sx={{ marginRight: "8px", color: "red" }} /> Delete
-              </MenuItem>
-              <MenuItem onClick={() => navigate(`/settings/device/${item.id}/connections`)}>
-                <LinkIcon sx={{ marginRight: "8px" }} /> Connections
-              </MenuItem>
-            </Menu> */}
-            
-                          
                         </TableCell>
                       </TableRow>
                     );

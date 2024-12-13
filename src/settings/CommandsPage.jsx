@@ -130,7 +130,7 @@ const CommandsPage = () => {
         menu={<SettingsMenu />}
         breadcrumbs={["settingsTitle", "sharedSavedCommands"]}
       >
-        <Box display="flex" alignItems="center" justifyContent="space-between" m="30px">
+        <Box m="30px 30px 0px 30px" display="flex" alignItems="center" justifyContent="space-between" mb={0}>
           <Typography variant="h5">{t("sharedSavedCommands")}</Typography>
           <Button
             variant="contained"

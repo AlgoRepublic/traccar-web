@@ -1,139 +1,8 @@
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import {
-//   Table, TableRow, TableCell, TableHead, TableBody, Switch, TableFooter, FormControlLabel, Box,
-// } from '@mui/material';
-// import LoginIcon from '@mui/icons-material/Login';
-// import LinkIcon from '@mui/icons-material/Link';
-// import { useCatch, useEffectAsync } from '../reactHelper';
-// import { formatBoolean, formatTime } from '../common/util/formatter';
-// import { useTranslation } from '../common/components/LocalizationProvider';
-// import PageLayout from '../common/components/PageLayout';
-// import SettingsMenu from './components/SettingsMenu';
-// import CollectionFab from './components/CollectionFab';
-// import CollectionActions from './components/CollectionActions';
-// import TableShimmer from '../common/components/TableShimmer';
-// import { useManager } from '../common/util/permissions';
-// import SearchHeader, { filterByKeyword } from './components/SearchHeader';
-// import useSettingsStyles from './common/useSettingsStyles';
-
-// const UsersPage = () => {
-//   const classes = useSettingsStyles();
-//   const navigate = useNavigate();
-//   const t = useTranslation();
-
-//   const manager = useManager();
-
-//   const [timestamp, setTimestamp] = useState(Date.now());
-//   const [items, setItems] = useState([]);
-//   const [searchKeyword, setSearchKeyword] = useState('');
-//   const [loading, setLoading] = useState(false);
-//   const [temporary, setTemporary] = useState(false);
-
-//   const handleLogin = useCatch(async (userId) => {
-//     const response = await fetch(`/api/session/${userId}`);
-//     if (response.ok) {
-//       window.location.replace('/');
-//     } else {
-//       throw Error(await response.text());
-//     }
-//   });
-
-//   const actionLogin = {
-//     key: 'login',
-//     title: t('loginLogin'),
-//     icon: <LoginIcon fontSize="small" />,
-//     handler: handleLogin,
-//   };
-
-//   const actionConnections = {
-//     key: 'connections',
-//     title: t('sharedConnections'),
-//     icon: <LinkIcon fontSize="small" />,
-//     handler: (userId) => navigate(`/settings/user/${userId}/connections`),
-//   };
-
-//   useEffectAsync(async () => {
-//     setLoading(true);
-//     try {
-//       const response = await fetch('/api/users');
-//       if (response.ok) {
-//         setItems(await response.json());
-//       } else {
-//         throw Error(await response.text());
-//       }
-//     } finally {
-//       setLoading(false);
-//     }
-//   }, [timestamp]);
-
-//   return (
-//     <Box sx={{marginTop:"20px"}}>
-//     <PageLayout menu={<SettingsMenu />} breadcrumbs={['settingsTitle', 'settingsUsers']}>
-//       <SearchHeader keyword={searchKeyword} setKeyword={setSearchKeyword} />
-//       <Table className={classes.table}>
-//         <TableHead>
-//           <TableRow>
-//             <TableCell>{t('sharedName')}</TableCell>
-//             <TableCell>{t('userEmail')}</TableCell>
-//             <TableCell>{t('userAdmin')}</TableCell>
-//             <TableCell>{t('sharedDisabled')}</TableCell>
-//             <TableCell>{t('userExpirationTime')}</TableCell>
-//             <TableCell className={classes.columnAction} />
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {!loading ? items.filter((u) => temporary || !u.temporary).filter(filterByKeyword(searchKeyword)).map((item) => (
-//             <TableRow key={item.id}>
-//               <TableCell>{item.name}</TableCell>
-//               <TableCell>{item.email}</TableCell>
-//               <TableCell>{formatBoolean(item.administrator, t)}</TableCell>
-//               <TableCell>{formatBoolean(item.disabled, t)}</TableCell>
-//               <TableCell>{formatTime(item.expirationTime, 'date')}</TableCell>
-//               <TableCell className={classes.columnAction} padding="none">
-//                 <CollectionActions
-//                   itemId={item.id}
-//                   editPath="/settings/user"
-//                   endpoint="users"
-//                   setTimestamp={setTimestamp}
-//                   customActions={manager ? [actionLogin, actionConnections] : [actionConnections]}
-//                 />
-//               </TableCell>
-//             </TableRow>
-//           )) : (<TableShimmer columns={6} endAction />)}
-//         </TableBody>
-//         <TableFooter>
-//           <TableRow>
-//             <TableCell colSpan={6} align="right">
-//               <FormControlLabel
-//                 control={(
-//                   <Switch
-//                     value={temporary}
-//                     onChange={(e) => setTemporary(e.target.checked)}
-//                     size="small"
-//                   />
-//                 )}
-//                 label={t('userTemporary')}
-//                 labelPlacement="start"
-//               />
-//             </TableCell>
-//           </TableRow>
-//         </TableFooter>
-//       </Table>
-//       <CollectionFab editPath="/settings/user" />
-//     </PageLayout>
-//     </Box>
-//   );
-// };
-
-// export default UsersPage;
-
-
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Table, TableRow, TableCell, TableHead, TableBody, TablePagination, TableSortLabel, TextField, IconButton, 
-  Toolbar, Button, FormControlLabel, Switch, Box, Paper, Checkbox, Typography, Tooltip,MenuItem,
+  Toolbar, Button, FormControlLabel, Switch, Box, Paper, Checkbox, Typography, Tooltip,MenuItem, TableContainer,
 } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import LinkIcon from '@mui/icons-material/Link';
@@ -153,6 +22,8 @@ import Grow from '@mui/material/Grow';
 import Popper from '@mui/material/Popper';
 import MenuList from '@mui/material/MenuList';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import FilterListIcon from "@mui/icons-material/FilterList";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const UsersPage = () => {
   const classes = useSettingsStyles();
@@ -294,6 +165,7 @@ const UsersPage = () => {
     }
   }
 
+  // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -302,13 +174,13 @@ const UsersPage = () => {
 
     prevOpen.current = open;
   }, [open]);
+  
 
   return (
     <Box sx={{ marginTop: "20px" }}>
       <PageLayout menu={<SettingsMenu />} breadcrumbs={['settingsTitle', 'settingsUsers']}>
         <SearchHeader keyword={searchKeyword} setKeyword={setSearchKeyword} />
-
-        <Box m="30px" display="flex" alignItems="center" mb={5}>
+        <Box m="30px 30px 0px 30px" display="flex" alignItems="center" mb={0}>
           <Typography variant="h5" sx={{ flex: 1 }}>
             User
           </Typography>
@@ -361,118 +233,180 @@ const UsersPage = () => {
                 }}
               />
             </Box>
+            {selected.length > 0 ? (
+              <Tooltip title={t("delete")}>
+                <IconButton>
+                  <DeleteIcon
+                    sx={{
+                      color: "red",
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title={t("filter")}>
+                 <IconButton>
+                  <FilterListIcon />
+                </IconButton> 
+              </Tooltip>
+            )}
           </Toolbar>
-
-          <Table>
+          <TableContainer>
+            <Table>
             <TableHead sx={{backgroundColor:"#F4F6F8"}}>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    color="primary"
-                    indeterminate={selected.length > 0 && selected.length < items.length}
-                    checked={items.length > 0 && selected.length === items.length}
-                    onChange={handleSelectAllClick}
-                  />
-                </TableCell>
-                <TableCell>
-                  <TableSortLabel
-                    active={orderBy === 'name'}
-                    direction={orderBy === 'name' ? order : 'asc'}
-                    onClick={(e) => handleRequestSort(e, 'name')}
-                  >
-                    {t('sharedName')}
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell>{t('userEmail')}</TableCell>
-                <TableCell>{t('userAdmin')}</TableCell>
-                <TableCell>{t('sharedDisabled')}</TableCell>
-                <TableCell>{t('userExpirationTime')}</TableCell>
-                <TableCell>Actions</TableCell>
+  <TableCell padding="checkbox">
+    <Checkbox
+      color="primary"
+      indeterminate={selected.length > 0 && selected.length < items.length}
+      checked={items.length > 0 && selected.length === items.length}
+      onChange={handleSelectAllClick}
+    />
+  </TableCell>
+  <TableCell>
+    <TableSortLabel
+      active={orderBy === 'name'}
+      direction={orderBy === 'name' ? order : 'asc'}
+      onClick={(e) => handleRequestSort(e, 'name')}
+    >
+      {t('sharedName')}
+    </TableSortLabel>
+  </TableCell>
+  <TableCell>
+    <TableSortLabel
+      active={orderBy === 'email'}
+      direction={orderBy === 'email' ? order : 'asc'}
+      onClick={(e) => handleRequestSort(e, 'email')}
+    >
+      {t('userEmail')}
+    </TableSortLabel>
+  </TableCell>
+  <TableCell>
+    <TableSortLabel
+      active={orderBy === 'administrator'}
+      direction={orderBy === 'administrator' ? order : 'asc'}
+      onClick={(e) => handleRequestSort(e, 'administrator')}
+    >
+      {t('userAdmin')}
+    </TableSortLabel>
+  </TableCell>
+  <TableCell>
+    <TableSortLabel
+      active={orderBy === 'disabled'}
+      direction={orderBy === 'disabled' ? order : 'asc'}
+      onClick={(e) => handleRequestSort(e, 'disabled')}
+    >
+      {t('sharedDisabled')}
+    </TableSortLabel>
+  </TableCell>
+  <TableCell>
+    <TableSortLabel
+      active={orderBy === 'expirationTime'}
+      direction={orderBy === 'expirationTime' ? order : 'asc'}
+      onClick={(e) => handleRequestSort(e, 'expirationTime')}
+    >
+      {t('userExpirationTime')}
+    </TableSortLabel>
+  </TableCell>
+  <TableCell>Actions</TableCell>
+</TableRow>
 
-                <TableCell />
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {!loading ? (
-                displayedItems.map((item) => {
-                  const isSelected = selected.includes(item.id);
-                  return (
-                    <TableRow
-                      key={item.id}
-                      onClick={(e) => handleClick(e, item.id)}
-                      selected={isSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
-                      </TableCell>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.email}</TableCell>
-                      <TableCell>{formatBoolean(item.administrator, t)}</TableCell>
-                      <TableCell>{formatBoolean(item.disabled, t)}</TableCell>
-                      <TableCell>{formatTime(item.expirationTime, 'date')}</TableCell>
-                      <TableCell>
-
-        <Button
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
+            </TableHead> 
+<TableBody>
+  {!loading ? (
+    displayedItems.map((item) => {
+      const isSelected = selected.includes(item.id);
+      return (
+        <TableRow
+          key={item.id}
+          onClick={(e) => handleClick(e, item.id)}
+          selected={isSelected}
         >
-          <MoreVertIcon/>
-          
-        </Button>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-
-          sx={{zIndex:"1"}}
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+          <TableCell padding="checkbox">
+            <Checkbox checked={isSelected} 
+             sx={{
+              '&.Mui-checked': {
+                color: selected ? '#1877F2' : 'default',  
+              },
+            }}
+            />
+          </TableCell>
+          <TableCell>{item.name}</TableCell>
+          <TableCell>{item.email}</TableCell>
+          <TableCell>{formatBoolean(item.administrator, t)}</TableCell>
+          <TableCell>{formatBoolean(item.disabled, t)}</TableCell>
+          <TableCell>{formatTime(item.expirationTime, 'date')}</TableCell>
+          <TableCell>
+            <Button
+              ref={anchorRef}
+              id="composition-button"
+              aria-controls={open ? 'composition-menu' : undefined}
+              aria-expanded={open ? 'true' : undefined}
+              aria-haspopup="true"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggle();
               }}
             >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
-                  >
-                    <MenuItem onClick={handleClose}>
-                    <CollectionActions
-                          itemId={item.id}
-                          editPath="/settings/user"
-                          endpoint="users"
-                          setTimestamp={setTimestamp}
-                          customActions={manager ? [actionLogin, actionConnections] : [actionConnections]}
-                        />
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })
-              ) : (
-                <TableShimmer columns={7} />
+              <MoreVertIcon sx={{color:"black"}} />
+            </Button>
+            {/* Popper Menu */}
+            <Popper
+              open={open}
+              anchorEl={anchorRef.current}
+              role={undefined}
+              placement="bottom-start"
+              transition
+              disablePortal
+              sx={{ zIndex: 1 }}
+            >
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin:
+                      placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  }}
+                >
+                  <Paper>
+                    <ClickAwayListener onClickAway={handleClose}>
+                      <MenuList
+                        autoFocusItem={open}
+                        id="composition-menu"
+                        aria-labelledby="composition-button"
+                        onKeyDown={handleListKeyDown}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <MenuItem
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleClose();
+                          }}
+                        >
+                          <CollectionActions
+                            itemId={item.id}
+                            editPath="/settings/user"
+                            endpoint="users"
+                            setTimestamp={setTimestamp}
+                            customActions={manager ? [actionLogin, actionConnections] : [actionConnections]}
+                          />
+                        </MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
               )}
-            </TableBody>
-          </Table>
+            </Popper>
+          </TableCell>
+        </TableRow>
+      );
+    })
+  ) : (
+    <TableShimmer columns={7} />
+  )}
+</TableBody>
+</Table>
+</TableContainer>
 
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}

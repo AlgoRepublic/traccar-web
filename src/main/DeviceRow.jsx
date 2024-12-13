@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
         padding: theme.spacing(1),
-        marginBottom: theme.spacing(1),
+        // marginBottom: theme.spacing(1),
       },
 }));
 
@@ -84,17 +84,21 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
       </>
     );
   };
-
+  console.log(selected);
   return (
     // <div style={style}>
     <Box style={style} className={classes.container}>
       <ListItemButton disableGutters key={link}  component={Link} to={link}
         sx={{
-          pl: 2,
-          // py: 1.5,
-          gap: 2,
-          pr: 1.5,
+          // pl: 3,
+          // py: 2,
+          // gap: 2,
+          // pr: 2,
           // m:1.3,
+          pl: 1,
+          pr:1, 
+          py: 1, 
+          gap: 1,
           borderRadius: '10px',
           fontSize: '14px',
           fontWeight: 600,
