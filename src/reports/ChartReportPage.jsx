@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import {
-  FormControl, InputLabel, Select, MenuItem, useTheme,
+  FormControl, InputLabel, Select, MenuItem, useTheme,Box,
 } from '@mui/material';
 import {
   altitudeFromMeters,
@@ -10,6 +10,13 @@ import {
   volumeFromLiters,
 } from "../common/util/converter";
 import useReportStyles from "./common/useReportStyles";
+import { useTranslation } from "../common/components/LocalizationProvider";
+import usePositionAttributes from "../common/attributes/usePositionAttributes";
+import { useAttributePreference } from "../common/util/preferences";
+import { useCatch, useCatchCallback } from "../reactHelper";
+import PageLayout from "../common/components/PageLayout";
+import ReportFilter from "./components/ReportFilter";
+import ReportsMenu from "./components/ReportsMenu";
 
 const ChartReportPage = () => {
   const classes = useReportStyles();
@@ -101,11 +108,14 @@ const ChartReportPage = () => {
   });
 
   return (
+    <Box sx={{marginTop:"50px"}}>
     <PageLayout
       menu={<ReportsMenu />}
       breadcrumbs={["reportTitle", "reportChart"]}
     >
-      <ReportFilter handleSubmit={handleSubmit} showOnly>
+       <div className={classes.container} style={{backgroundColor:"#fff", borderRadius:"10px",
+          margin: "10px 20px", boxShadow:"0 0 12px 0 rgba(0, 0, 0, 20%)"}}>
+       <ReportFilter  handleSubmit={handleSubmit} showOnly>
         <div className={classes.filterItem}>
           <FormControl fullWidth>
             <InputLabel>{t("reportChartType")}</InputLabel>
@@ -180,7 +190,10 @@ const ChartReportPage = () => {
           </ResponsiveContainer>
         </div>
       )}
+       </div>
+      
     </PageLayout>
+    </Box>
   );
 };
 

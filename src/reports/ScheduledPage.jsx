@@ -64,7 +64,8 @@ const ScheduledPage = () => {
   return (
     <Box sx={{marginTop:"50px"}}>
     <PageLayout menu={<ReportsMenu />} breadcrumbs={['settingsTitle', 'reportScheduled']}>
-    <div className={classes.containerMain} style={{backgroundColor:"#fff" , borderRadius:"10px", margin:"10px" }}>
+    <div className={classes.containerMain} style={{backgroundColor:"#fff", borderRadius:"10px",
+          margin: "10px 20px", boxShadow:"0 0 12px 0 rgba(0, 0, 0, 20%)"}}>
       <Table>
         <TableHead>
           <TableRow>

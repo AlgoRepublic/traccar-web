@@ -66,7 +66,8 @@ const StatisticsPage = () => {
       menu={<ReportsMenu />}
       breadcrumbs={["reportTitle", "statisticsTitle"]}
     >
-      <div className={classes.container} style={{backgroundColor:"#fff" , borderRadius:"10px", margin:"10px"}}>
+      <div className={classes.container} style={{backgroundColor:"#fff", borderRadius:"10px",
+          margin: "10px 20px", boxShadow:"0 0 12px 0 rgba(0, 0, 0, 20%)"}}>
       <div className={classes.header}>
         <ReportFilter
           handleSubmit={handleSubmit}

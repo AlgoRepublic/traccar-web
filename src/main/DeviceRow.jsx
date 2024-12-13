@@ -54,8 +54,7 @@ const useStyles = makeStyles((theme) => ({
         // marginBottom: theme.spacing(1),
       },
 }));
-
-const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
+const DeviceRow = ({ data, index, style, link, selected = false }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const t = useTranslation();
@@ -68,7 +67,8 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
   const devicePrimary = useAttributePreference('devicePrimary', 'name');
   const deviceSecondary = useAttributePreference('deviceSecondary', '');
 
-
+  // Get the selected device id from Redux store
+  const selectedId = useSelector((state) => state.devices.selectedId);
 
   const secondaryText = () => {
     let status;
@@ -84,42 +84,37 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
       </>
     );
   };
-  console.log(selected);
+
   return (
-    // <div style={style}>
     <Box style={style} className={classes.container}>
-      <ListItemButton disableGutters key={link}  component={Link} to={link}
+      <ListItemButton
+        disableGutters
+        key={link}
+        component={Link}
+        to={link}
         sx={{
-          // pl: 3,
-          // py: 2,
-          // gap: 2,
-          // pr: 2,
-          // m:1.3,
           pl: 1,
-          pr:1, 
-          py: 1, 
-          gap: 1,
+          pr: 1,
+          py: 1,
           borderRadius: '10px',
           fontSize: '14px',
           fontWeight: 600,
           lineHeight: 1.5,
           color: '#637381',
           bgcolor: "#fff",
-          '&:hover': { bgcolor: '#F6F7F9', color: '#637381', },
-          ...(selected && {
+          '&:hover': { bgcolor: '#F6F7F9', color: '#637381' },
+          ...(selectedId === item.id && {
             fontWeight: 'bold',
-            bgcolor: '#1877F214',
+            bgcolor: '#1877F214', // Light green when selected
             color: '#71a0de',
             '&:hover': {
-              bgcolor: '#cbdff7',
+              bgcolor: '#cbdff7', // Lighter hover color
             },
           }),
         }}
-        // key={item.id}
         onClick={() => dispatch(devicesActions.selectId(item.id))}
         disabled={!admin && item.disabled}
       >
-  
         <ListItemAvatar>
           <Avatar>
             <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />
@@ -127,9 +122,15 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
         </ListItemAvatar>
         <ListItemText
           primary={item[devicePrimary]}
-          primaryTypographyProps={{ noWrap: true }}
+          primaryTypographyProps={{ 
+            noWrap: true, 
+            sx: { fontSize: "14px" } 
+          }}
           secondary={secondaryText()}
-          secondaryTypographyProps={{ noWrap: true }}
+          secondaryTypographyProps={{ 
+            noWrap: true, 
+            sx: { fontSize: "14px", color:"1877F2" } 
+          }}
         />
         {position && (
           <>
@@ -173,9 +174,7 @@ const DeviceRow = ({ data, index, style, link,  selected = false  }) => {
           </>
         )}
       </ListItemButton>
-      {/* <Divider /> */}
-      </Box>
-    // </div>
+    </Box>
   );
 };
 

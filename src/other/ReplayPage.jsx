@@ -21,6 +21,7 @@ import { useCatch } from "../reactHelper";
 import MapCamera from "../map/MapCamera";
 import MapGeofence from "../map/MapGeofence";
 import StatusCard from "../common/components/StatusCard";
+import MapScale from '../map/MapScale';
 
 
 const useStyles = makeStyles((theme) => ({
